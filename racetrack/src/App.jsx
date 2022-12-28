@@ -1,12 +1,16 @@
 import React, { Component } from "react";
-import {Nav} from './components/Nav'
+import { LogoBar } from "./components/Logo";
+import { Nav } from './components/Nav'
 
 class App extends Component {
   render() {
     return (
-      <Nav/>
-        )
+      <>
+        <Nav />
+        <LogoBar />
+      </>
+    )
   }
 }
 
-        export default App
+export default App
