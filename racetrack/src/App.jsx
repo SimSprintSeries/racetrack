@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { LogoBar } from "./components/Logo";
 import { Nav } from './components/Nav'
+import { Events } from './components/Events'
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
       <>
         <Nav />
         <LogoBar />
+        <Events />
       </>
     )
   }
