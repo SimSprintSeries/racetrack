@@ -63,4 +63,4 @@ const Message = props => {
 }
 
 const MessagesSection = <div className='MessagesSection'><Messages/><div></div></div>
-export { MessagesSection }
+export { MessagesSection, Messages }

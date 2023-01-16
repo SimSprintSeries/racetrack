@@ -2,9 +2,10 @@ import React, { Component, useEffect } from 'react';
 import { LogoBar } from './components/Logo';
 import { Nav } from './components/Nav'
 import { Events } from './components/Events'
-import { MessagesSection } from './components/Messages'
+import { Messages } from './components/Messages'
 import { Login } from './components/Login'
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { Leagues } from './components/Leagues';
 
 class App extends Component {
   render() {
@@ -26,7 +27,7 @@ class Main extends Component {
         <Nav />
         <LogoBar />
         <Events />
-        {MessagesSection}
+        <div className='grid grid-cols-2'><Messages/><Leagues/></div>
       </>
     )
   }
