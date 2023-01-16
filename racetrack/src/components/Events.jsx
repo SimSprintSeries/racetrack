@@ -3,7 +3,7 @@ import { Component } from "react";
 class Events extends Component {
     render() {
         return (
-            <div className="flex flex-col justify-center items-center bg-zinc-100">
+            <div className="flex flex-col justify-center items-center bg-bg">
                 <div className="text-2xl p-4">Nadchodzące wydarzenia</div>
                 <div className="flex mb-8">
                     <Event />

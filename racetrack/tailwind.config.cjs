@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         'nav': '#040B1C',
-        'bg': '#1E1E1E',
+        'bg': '#081631',
         'green': '#00A64F',
       },
     },

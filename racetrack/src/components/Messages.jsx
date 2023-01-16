@@ -42,7 +42,7 @@ class Messages extends Component {
     render() {
 
         return (
-            <div className='messageDiv'>
+            <div className='messageDiv bg-bg'>
                 {this.state.messagesConst}
             </div>
         )
@@ -51,7 +51,7 @@ class Messages extends Component {
 
 const Message = props => {
     return (
-        <article className="message">
+        <article className="message bg-bg">
             <h1>{props.title}</h1>
             <p>{props.content}</p>
             <div>
@@ -61,6 +61,4 @@ const Message = props => {
         </article>
     )
 }
-
-const MessagesSection = <div className='MessagesSection'><Messages/><div></div></div>
-export { MessagesSection, Messages }
+export {  Messages }

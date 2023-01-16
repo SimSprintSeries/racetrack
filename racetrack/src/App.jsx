@@ -23,12 +23,12 @@ class App extends Component {
 class Main extends Component {
   render() {
     return (
-      <>
+      <div className='bg-bg'>
         <Nav />
         <LogoBar />
         <Events />
         <div className='grid grid-cols-2'><Messages/><Leagues/></div>
-      </>
+      </div>
     )
   }
 }
