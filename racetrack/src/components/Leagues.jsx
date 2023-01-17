@@ -3,11 +3,11 @@ import { Component } from "react";
 class Leagues extends Component {
     render() {
         return (
-            <div>
+            <div className='grid grid-cols-2 p-10 bg-nav'>
                 <LeagueLink leagueName='F1 Liga A' />
-                <LeagueLink leagueName='F1 Liga A' />
-                <LeagueLink leagueName='F1 Liga A' />
-                <LeagueLink leagueName='F1 Liga A' />
+                <LeagueLink leagueName='F1 Liga B' />
+                <LeagueLink leagueName='F1 Liga C' />
+                <LeagueLink leagueName='ACC GT4 - sezon 1' />
             </div>
         )
     }
@@ -15,7 +15,7 @@ class Leagues extends Component {
 
 class LeagueLink extends Component {
     render() {
-        return <div className="flex bg-green/50 w-4/5 h-12 m-4 justify-center items-center">{this.props.leagueName}</div>
+        return <div className="flex bg-green/75 m-4 justify-center items-center text-white rounded-xl text-[32px]">{this.props.leagueName}</div>
     }
 }
 

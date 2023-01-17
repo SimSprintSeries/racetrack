@@ -1,5 +1,4 @@
 import { Component } from "react";
-import "./css/style.css";
 
 class Messages extends Component {
 
@@ -42,7 +41,7 @@ class Messages extends Component {
     render() {
 
         return (
-            <div className='messageDiv bg-bg'>
+            <div className='box-border p-10 bg-nav'>
                 {this.state.messagesConst}
             </div>
         )
@@ -51,12 +50,12 @@ class Messages extends Component {
 
 const Message = props => {
     return (
-        <article className="message bg-bg">
-            <h1>{props.title}</h1>
-            <p>{props.content}</p>
-            <div>
-                <button>Read more...</button>
-                <span>{props.date} by {props.author}</span>
+        <article>
+            <h1 className='text-white font-bold text-[32px]'>{props.title}</h1>
+            <p className='text-white/50 '>{props.content}</p>
+            <div className='grid grid-cols-[1fr_1fr] text-white'>
+                <button className='text-white text-left'>Read more...</button>
+                <span className='text-white text-right'>{props.date} by {props.author}</span>
             </div>
         </article>
     )
