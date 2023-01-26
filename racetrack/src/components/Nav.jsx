@@ -1,8 +1,11 @@
 import { useSignOut, useIsAuthenticated } from "react-auth-kit"
+import logo from '../images/ssslogo.png'
 
 function Nav(props) {
     const signOut = useSignOut()
     const isAuthenticated = useIsAuthenticated()
+    const loginButtonStyle = 'text-color border-[1px] border-white rounded-[25px] px-12 py-2 font-thin hover:bg-color hover:text-green ease-linear duration-100'
+    const navButtonStyle = 'text-color text-center font-thin hover:-translate-y-1 ease-linear duration-100'
 
     async function onSubmit() {
         try {
@@ -15,22 +18,21 @@ function Nav(props) {
 
     function displayLoginLogout() {
         if (isAuthenticated()) {
-            return <button className="text-white px-4 py-1" onClick={() => signOut()}>WYLOGUJ</button>
+            return <button className={loginButtonStyle} onClick={() => signOut()}>WYLOGUJ</button>
         } else {
-            return <button className="text-white px-4 py-1" onClick={() => onSubmit()}>ZALOGUJ</button>
+            return <button className={loginButtonStyle} onClick={() => onSubmit()}>ZALOGUJ</button>
         }
     }
 
     return (
-        <header className="h-12 flex justify-center items-center bg-nav">
-            <nav>
-                <a href="" className="text-white px-10 py-1">GŁÓWNA</a>
-                <a href="" className="text-white px-10 py-1">EVENTY</a>
-                <a href="" className="text-white px-10 py-1">DISCORD</a>
-                <a href="" className="text-white px-7 py-4 bg-green rounded-lg">PANEL KIEROWCY</a>
-                <a href="" className="text-white px-10 py-1">STATYSTYKI</a>
-                <a href="" className="text-white px-10 py-1">KONTAKT</a>
-                {displayLoginLogout()}
+        <header className="h-[150px] grid grid-cols-[2fr_3fr] place-items-center">
+            <div><img src={logo} alt="sim sprint series logo" className="w-[675px] mix-blend-screen"/></div>
+            <nav className='grid grid-cols-[1fr_1fr_1fr_1fr_1.5fr] text-[20px] place-items-center w-full'>
+                <a href="" className={navButtonStyle}>EVENTY</a>
+                <a href="" className={navButtonStyle}>DISCORD</a>
+                <a href="" className={navButtonStyle} >STATYSTYKI</a>
+                <a href="" className={navButtonStyle}>PANEL KIEROWCY</a>
+                <div>{displayLoginLogout()}</div>
             </nav>
         </header>)
 }

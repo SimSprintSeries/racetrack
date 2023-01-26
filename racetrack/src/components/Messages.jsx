@@ -51,11 +51,11 @@ class Messages extends Component {
 const Message = props => {
     return (
         <article>
-            <h1 className='text-white font-bold text-[32px]'>{props.title}</h1>
-            <p className='text-white/50 '>{props.content}</p>
-            <div className='grid grid-cols-[1fr_1fr] text-white'>
-                <button className='text-white text-left'>Read more...</button>
-                <span className='text-white text-right'>{props.date} by {props.author}</span>
+            <h1 className='text-color font-bold text-[32px]'>{props.title}</h1>
+            <p className='text-color/50 '>{props.content}</p>
+            <div className='grid grid-cols-[1fr_1fr] text-color'>
+                <button className='text-color text-left'>Read more...</button>
+                <span className='text-color text-right'>{props.date} by {props.author}</span>
             </div>
         </article>
     )

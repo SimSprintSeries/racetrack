@@ -1,11 +1,10 @@
 import React, { Component, useEffect } from 'react';
-import { LogoBar } from './components/Logo';
-import { Nav } from './components/Nav'
-import { Events } from './components/Events'
-import { Messages } from './components/Messages'
 import { Login } from './components/Login'
 import { Routes, Route } from 'react-router-dom';
-import { Leagues } from './components/Leagues';
+import { Nav } from './components/Nav'
+import { InfoBar } from "./components/Info.jsx";
+import { Events } from "./components/Events.jsx";
+
 
 class App extends Component {
   render() {
@@ -23,11 +22,10 @@ class App extends Component {
 class Main extends Component {
   render() {
     return (
-      <div className='bg-bg'>
-        <Nav />
-        <LogoBar />
-        <Events />
-        <div className='grid grid-cols-2'><Messages/><Leagues/></div>
+      <div>
+        <Nav/>
+        <InfoBar/>
+        <Events/>
       </div>
     )
   }

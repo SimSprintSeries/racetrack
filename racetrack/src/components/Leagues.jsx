@@ -15,7 +15,7 @@ class Leagues extends Component {
 
 class LeagueLink extends Component {
     render() {
-        return <div className="flex bg-green/75 m-4 justify-center items-center text-white rounded-xl text-[32px]">{this.props.leagueName}</div>
+        return <div className="flex bg-green/75 m-4 justify-center items-center text-color rounded-xl text-[32px]">{this.props.leagueName}</div>
     }
 }
 

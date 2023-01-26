@@ -10,6 +10,7 @@ module.exports = {
         'nav': '#1F1F1F',
         'bg': '#1A1A1A',
         'green': '#00A64F',
+        'color': '#faf4ed',
       },
     },
   },
