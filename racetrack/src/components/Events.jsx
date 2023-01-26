@@ -25,8 +25,7 @@ const LastEvent = () => {
     return (
         <><div className="text-2xl p-16 pb-12 text-color">Ostatnia transmisja</div>
             <div className="flex w-full items-center justify-center">
-                <div className=''><div className='bg-bg w-[190px] h-[190px] text-color grid place-content-center rounded-[5px] self-center mr-9'>F1 22 Liga A</div></div>
-                <a href="" className="grid place-content-center text-[24px] text-color w-1/4">Monza 25.01.2023 20:10</a>
+                <div className='bg-bg w-[380px] h-[250px] rounded-[5px] self-center mb-16'></div>
             </div></>
     )
 }

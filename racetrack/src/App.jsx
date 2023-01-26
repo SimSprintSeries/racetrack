@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Nav } from './components/Nav'
 import { InfoBar } from "./components/Info.jsx";
 import { Events } from "./components/Events.jsx";
+import { Content } from "./components/Content.jsx";
 
 
 class App extends Component {
@@ -26,6 +27,7 @@ class Main extends Component {
         <Nav/>
         <InfoBar/>
         <Events/>
+        <Content/>
       </div>
     )
   }
