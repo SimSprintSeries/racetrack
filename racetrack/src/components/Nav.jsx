@@ -9,8 +9,8 @@ function Nav(props) {
 
     async function onSubmit() {
         try {
-            const res = await fetch('http://146.59.34.32:8080/api/oauth2/authorization/discord')
-            window.location.href = res.url
+            window.location.href =
+              "http://146.59.34.32:8080/api/oauth2/authorization/discord";
         } catch (error) {
             console.log(error)
         }

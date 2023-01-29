@@ -1,37 +1,28 @@
 import { useSignIn } from 'react-auth-kit';
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function Login(props) {
+    const signIn = useSignIn();
+  const [searchParams] = useSearchParams();
 
-    const signIn = useSignIn()
+  async function getAuthToken() {
+    fetch(
+      `http:/146.59.34.32:8080/api/login/oauth2/code/discord?code=${searchParams.get("code")}&state=${searchParams.get("state")}`,
+      {
+        credentials: "include",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((ex) => console.log(ex));
+  }
 
-    function getCodeState() {
-        const params = []
-        const url = window.location.search
-        const indexOfCode = url.indexOf('code=')
-        const indexOfState = url.indexOf('&state=')
-        params.push(url.slice(indexOfCode + 5, indexOfState))
-        params.push(url.slice(indexOfState + 7, url.length))
-        return params
-    }
+  useEffect(() => {
+    getAuthToken();
+  }, []);
 
-    async function getAuthToken() {
-        const params = getCodeState()
-        try {
-            const response = fetch(`http://146.59.34.32:8080/api/login/oauth2/code/discord?code=${params[1]}&state=${params[2]}`)
-            signIn({
-                token: response.token,
-                expiresIn: 6000,
-                tokenType: 'Bearer',
-                authState: { name: 'username' }
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    // useEffect(() => { getAuthToken() }, [])
-
-    return <h1>Logowanie...</h1>
+  return <h1>Logowanie...</h1>;
 }
 
 export { Login }
