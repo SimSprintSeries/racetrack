@@ -1,5 +1,6 @@
 import { useSignOut, useIsAuthenticated } from "react-auth-kit"
 import logo from '../images/ssslogo.png'
+import {NavLink} from "react-router-dom";
 
 function Nav(props) {
     const signOut = useSignOut()
@@ -26,12 +27,12 @@ function Nav(props) {
 
     return (
         <header id='section0' className="h-[150px] grid grid-cols-[2fr_3fr] place-items-center">
-            <div><img src={logo} alt="sim sprint series logo" className="w-[675px] mix-blend-screen"/></div>
+            <NavLink to="/"><img src={logo} alt="sim sprint series logo" className="w-[675px] mix-blend-screen"/></NavLink>
             <nav className='grid grid-cols-[1fr_1fr_1fr_1fr_1.5fr] text-[20px] place-items-center w-full'>
-                <a href="" className={navButtonStyle}>EVENTY</a>
-                <a href="" className={navButtonStyle}>DISCORD</a>
-                <a href="" className={navButtonStyle} >STATYSTYKI</a>
-                <a href="" className={navButtonStyle}>PANEL KIEROWCY</a>
+                <NavLink to="" className={navButtonStyle}>EVENTY</NavLink>
+                <NavLink to="discord" className={navButtonStyle}>DISCORD</NavLink>
+                <NavLink to="" className={navButtonStyle} >STATYSTYKI</NavLink>
+                <NavLink to="" className={navButtonStyle}>PANEL KIEROWCY</NavLink>
                 <div>{displayLoginLogout()}</div>
             </nav>
         </header>)
