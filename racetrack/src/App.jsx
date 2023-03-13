@@ -1,27 +1,23 @@
-import React, { Component, useEffect } from 'react';
-import { Login } from './components/Login'
-import { Routes, Route } from 'react-router-dom';
+import React from 'react';
 import { Nav } from './components/Nav'
 import PageContent from "./components/PageContent.jsx";
+import {Provider} from "react-redux";
+import store from "./store/store.jsx";
 
 
-class App extends Component {
-  render() {
+const App = () => {
     return (
       <Main/>
     )
-  }
 }
 
-class Main extends Component {
-  render() {
+const Main = () => {
     return (
-      <div>
+      <Provider store={store}>
         <Nav/>
         <PageContent/>
-      </div>
+      </Provider>
     )
-  }
 }
 
 export default App

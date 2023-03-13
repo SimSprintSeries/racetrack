@@ -1,8 +1,5 @@
-import { Component } from "react";
+const Leagues = () => {
 
-class Leagues extends Component {
-
-    render() {
         return (
             <div className='flex flex-col items-center'>
                 <div className='text-color text-center p-10 text-[24px] font-thin'>Nasze trwające ligi</div>
@@ -14,13 +11,10 @@ class Leagues extends Component {
                 </div>
             </div>
         )
-    }
 }
 
-class LeagueLink extends Component {
-    render() {
-        return <div className="flex w-[150px] h-[400px] justify-center items-center cursor-pointer first:rounded-l-lg last:rounded-r-lg p-4 bg-[url('./images/bg.png')] bg-cover bg-left text-color/25 hover:bg-center hover:text-color/100 hover:scale-110 ease-linear duration-100">{this.props.leagueName}</div>
-    }
+const LeagueLink= (props) => {
+        return <div className="flex w-[150px] h-[400px] justify-center items-center cursor-pointer first:rounded-l-lg last:rounded-r-lg p-4 bg-[url('./images/bg.png')] bg-cover bg-left text-color/25 hover:bg-center hover:text-color/100 hover:scale-110 ease-linear duration-100">{props.leagueName}</div>
 }
 
 export { Leagues }
