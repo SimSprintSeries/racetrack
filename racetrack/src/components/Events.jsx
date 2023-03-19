@@ -3,7 +3,7 @@ import { Component } from "react";
 class Events extends Component {
     render() {
         return (
-            <div className="flex flex-col justify-center items-center w-[40%] font-thin">
+            <div className="flex flex-col justify-center items-center lg:w-[40%] font-thin">
                 <Event/>
                 <LastEvent/>
             </div>
