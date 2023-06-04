@@ -25,7 +25,7 @@ const LastEvent = () => {
     return (
         <><div className="text-2xl p-16 pb-12 text-color">Ostatnia transmisja</div>
             <div className="flex w-full items-center justify-center">
-                <div className='bg-bg w-[380px] h-[250px] rounded-[5px] self-center mb-16'></div>
+                <iframe className='aspect-video w-1/2 mb-16' src="https://www.youtube.com/embed/T-qwAJ2CnKM" title='LiveStream' allowFullScreen></iframe>
             </div></>
     )
 }
