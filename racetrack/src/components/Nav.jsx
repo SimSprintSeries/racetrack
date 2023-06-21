@@ -5,8 +5,8 @@ import {NavLink} from "react-router-dom";
 const Nav = props => {
     const signOut = useSignOut()
     const isAuthenticated = useIsAuthenticated()
-    const loginButtonStyle = 'text-color border-[1px] border-white rounded-[25px] px-12 py-2 font-thin hover:bg-color hover:text-green ease-linear duration-100 hidden lg:block'
-    const navButtonStyle = 'text-color text-center font-thin hover:-translate-y-1 ease-linear duration-100 hidden lg:block'
+    const loginButtonStyle = 'text-color border-[1px] border-white rounded-[25px] px-12 py-2 font-thin hover:bg-color hover:text-green ease-linear duration-100 hidden lg:block box-content'
+    const navButtonStyle = 'text-color text-center font-thin hover:-translate-y-1 ease-linear duration-100 hidden lg:block grow'
 
     async function onSubmit() {
         try {
@@ -26,14 +26,15 @@ const Nav = props => {
     }
 
     return (
-        <header id='section0' className="h-[150px] grid lg:grid-cols-[2fr_3fr] place-items-center">
+        <header id='section0' className="grid lg:grid-cols-[2fr_3fr] p-4 place-items-center max-h-[15vh]">
             <NavLink to="/"><img src={logo} alt="sim sprint series logo" className="w-[675px] mix-blend-screen"/></NavLink>
-            <nav className='grid grid-cols-[1fr_1fr_1fr_1fr_1.5fr] text-[20px] place-items-center w-full'>
-                <NavLink to="/events" className={navButtonStyle}>EVENTY</NavLink>
+            <nav className='flex text-[20px] place-items-center w-full'>
+                <NavLink to="/events" className={navButtonStyle}>SEZONY</NavLink>
                 <a href='https://discord.com/invite/gVHE7Sf' target='_blank' className={navButtonStyle}>DISCORD</a>
                 <NavLink to="/stats" className={navButtonStyle} >STATYSTYKI</NavLink>
+                <NavLink to="/" className={navButtonStyle} >AKTUALNOŚCI</NavLink>
                 <NavLink to="/driver" className={navButtonStyle}>PANEL KIEROWCY</NavLink>
-                <div>{displayLoginLogout()}</div>
+                <div className='grow flex justify-center'>{displayLoginLogout()}</div>
             </nav>
         </header>)
 }

@@ -16,6 +16,7 @@ const Main = () => {
       <Provider store={store}>
         <Nav/>
         <PageContent/>
+        <footer className='absolute w-full p-2 text-color/50 bottom-0'><p className='w-full text-center'>Copyrights by SSS</p></footer>
       </Provider>
     )
 }

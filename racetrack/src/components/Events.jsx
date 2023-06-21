@@ -1,9 +1,9 @@
-import { Component } from "react";
+import React, {Component, useEffect, useState} from "react";
 
 class Events extends Component {
     render() {
         return (
-            <div className="flex flex-col justify-center items-center lg:w-[40%] font-thin">
+            <div className="flex flex-col justify-center items-center lg:w-[40%] font-thin max-h-[75vh] box-border">
                 <Event/>
                 <LastEvent/>
             </div>
@@ -12,11 +12,25 @@ class Events extends Component {
 }
 
 const Event = () => {
+    const [nextEventName, setNextEventName] = useState();
+    const [nextEventDate, setNextEventDate] = useState();
+
+    useEffect(() => {
+        fetch("http://57.128.195.196:8080/api/race?currentPage=0&pageSize=1&sort=startDate&sortDirection=ASC&completed=false", {headers: {Accept: "*/*"}})
+            .then(response => response.json())
+            .then(result => {
+                setNextEventName(result.content[0].split.league.game.name + ' Liga ' + result.content[0].split.name)
+                setNextEventDate(result.content[0].startDate)
+            } )
+            .catch(err => console.log(err))
+    }, [])
+
+
     return (
         <><div className="text-2xl p-4 pb-12 text-color">Najbliższe wydarzenie</div>
             <div className="flex w-full items-center justify-center">
-                <div className=''><div className='bg-bg w-[190px] h-[190px] text-color grid place-content-center rounded-[5px] self-center mr-9'>F1 22 Liga A</div></div>
-                <a href="" className="grid place-content-center text-[24px] text-color w-1/4">Monza 25.01.2023 20:10</a>
+                <div className=''><div className='bg-bg w-[190px] h-[190px] text-color grid place-content-center rounded-[5px] self-center mr-9'>{nextEventName}</div></div>
+                <a href="" className="grid place-content-center text-[24px] text-color w-1/4">Monza {nextEventDate}</a>
             </div></>
     )
 }

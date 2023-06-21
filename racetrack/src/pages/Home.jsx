@@ -1,13 +1,13 @@
 import {InfoBar} from "../components/Info.jsx";
 import {Events} from "../components/Events.jsx";
-import {Content} from "../components/Content.jsx";
+import {Socials} from "../components/Socials.jsx";
 
 const Home = () => {
     return (
         <>
             <InfoBar/>
             <Events/>
-            <Content/>
+            <Socials/>
         </>
     )
 }
