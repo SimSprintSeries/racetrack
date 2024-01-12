@@ -1,12 +1,23 @@
 import { useSignOut, useIsAuthenticated } from "react-auth-kit"
 import logo from '../images/ssslogo.png'
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 const Nav = props => {
     const signOut = useSignOut()
     const isAuthenticated = useIsAuthenticated()
-    const loginButtonStyle = 'text-color border-[1px] border-white rounded-[25px] px-12 py-2 font-thin hover:bg-color hover:text-green ease-linear duration-100 hidden lg:block box-content'
-    const navButtonStyle = 'text-color text-center font-thin hover:-translate-y-1 ease-linear duration-100 hidden lg:block grow'
+    const loginButtonStyle = 'text-color px-12 py-4 font-thin hover:bg-color hover:text-green ease-linear duration-100'
+    const navButtonStyle = 'text-color text-center font-thin hover:-translate-y-1 ease-linear duration-100 lg:block p-4'
+
+    const [navVisibility, setNavVisibility] = useState(false);
+    const [navStyleClass, setNavStyleClass] = useState('none');
+    const location = useLocation();
+
+    useEffect(() => {
+        if(navVisibility) {
+            switchNavVisibility();
+        }
+    }, [location])
 
     async function onSubmit() {
         try {
@@ -25,16 +36,26 @@ const Nav = props => {
         }
     }
 
+    const switchNavVisibility = () => {
+        if(navVisibility) {
+            setNavStyleClass('none')
+        } else if (!navVisibility) {
+            setNavStyleClass('flex')
+        }
+        setNavVisibility(!navVisibility);
+    }
+
     return (
-        <header id='section0' className="grid lg:grid-cols-[2fr_3fr] p-4 place-items-center max-h-[15vh]">
-            <NavLink to="/"><img src={logo} alt="sim sprint series logo" className="w-[675px] mix-blend-screen"/></NavLink>
-            <nav className='flex text-[20px] place-items-center w-full'>
+        <header id='section0' className="flex p-4 place-items-center gap-4">
+            <NavLink to="/"><img src={logo} alt="sim sprint series logo" className="flex lg:w-[675px] mix-blend-screen"/></NavLink>
+            <button onClick={() => switchNavVisibility()} className='text-color z-50 text-4xl'><div className='flex flex-col gap-1'><div className='w-[.75em] bg-color h-0.5'></div><div className='w-[.75em] bg-color h-0.5'></div><div className='w-[.75em] bg-color h-0.5'></div></div></button>
+            <nav className='flex flex-col flex-grow-1 lg:flex-row fixed right-0 top-0 bg-nav pl-4 pr-16 box-content h-full z-40 ease-linear duration-100 w-auto' style={{display: navStyleClass}}>
                 <NavLink to="/events" className={navButtonStyle}>SEZONY</NavLink>
                 <a href='https://discord.com/invite/gVHE7Sf' target='_blank' className={navButtonStyle}>DISCORD</a>
                 <NavLink to="/stats" className={navButtonStyle} >STATYSTYKI</NavLink>
                 <NavLink to="/" className={navButtonStyle} >AKTUALNOŚCI</NavLink>
                 <NavLink to="/driver" className={navButtonStyle}>PANEL KIEROWCY</NavLink>
-                <div className='grow flex justify-center'>{displayLoginLogout()}</div>
+                <div className='justify-center'>{displayLoginLogout()}</div>
             </nav>
         </header>)
 }

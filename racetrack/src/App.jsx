@@ -7,17 +7,12 @@ import store from "./store/store.jsx";
 
 const App = () => {
     return (
-      <Main/>
-    )
-}
-
-const Main = () => {
-    return (
-      <Provider store={store}>
-        <Nav/>
-        <PageContent/>
-        <footer className='absolute w-full p-2 text-color/50 bottom-0'><p className='w-full text-center'>Copyrights by SSS</p></footer>
-      </Provider>
+        <Provider store={store}>
+            <div className='h-screen flex flex-col'>
+                <Nav/>
+                <PageContent/>
+            </div>
+        </Provider>
     )
 }
 
