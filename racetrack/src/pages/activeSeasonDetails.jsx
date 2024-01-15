@@ -34,7 +34,7 @@ const EventTile = props => {
         <div className='bg-bg/35 p-3 truncate relative'>
             <Link to={'/events/season/' + seasonId + '/event/' + eventId}>
             <h1>{props.name}</h1>
-                <img className='absolute top-[-6px] right-0 scale-[2] opacity-10 gradient-mask-l-0' src={"https://flagsapi.com/" + country + "/flat/64.png"} alt={country}/>
+                <img className='absolute top-[-6px] right-0 scale-[2] opacity-20 gradient-mask-l-0' src={"https://flagsapi.com/" + country + "/flat/64.png"} alt={country}/>
             </Link>
         </div>
 

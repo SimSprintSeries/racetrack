@@ -15,7 +15,7 @@ const EventDetails = () => {
 
     return (
         <div>
-            <h1 className='p-8 pb-0 text-color text-xl font-thin'>Splity:</h1>
+            <h1 className='p-8 pb-0 text-color text-xl font-thin text-center'>Splity:</h1>
             <div className='text-color flex flex-col lg:flex-row w-full h-screen p-8 space-y-4 grow'>
             {raceList}
             </div>
@@ -29,7 +29,7 @@ const RaceTile = props => {
     const {seasonId} = useParams();
 
     return (
-        <Link to={'/events/season/' + seasonId + '/race/' + raceId} className='flex justify-center'>
+        <Link to={'/events/season/' + seasonId + '/race/' + raceId} className='flex justify-center p-2 bg-bg/35'>
             <h1 className='text-2xl'>Split {props.name}</h1>
         </Link>
     )

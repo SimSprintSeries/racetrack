@@ -6,7 +6,7 @@ const ActiveSeasons = () => {
     const [activeSeasonsList, setActiveSeasonsList] = useState();
 
     useEffect(() => {
-        fetch( 'http://57.128.195.196:8080/api/league/paginated?currentPage=0&pageSize=20&sort=startDate&sortDirection=DESC&active=true', {headers: {Accept: "*/*"}})
+        fetch( 'http://57.128.195.196:8080/api/league?currentPage=0&pageSize=10&sort=startDate&active=true', {headers: {Accept: "*/*"}})
             .then(response => response.json())
             .then(result => setActiveSeasonsList(result.content.map(item => <ActiveSeasonTile key={item.id} name={item.name} id={item.id}></ActiveSeasonTile>)))
     }, [])

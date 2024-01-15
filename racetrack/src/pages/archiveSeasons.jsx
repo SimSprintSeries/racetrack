@@ -10,10 +10,10 @@ const ArchiveSeasons = () => {
     const [nextPageLength, setNextPageLength] = useState(1)
 
     useEffect(() => {
-        fetch( 'http://57.128.195.196:8080/api/league/paginated?currentPage=' + page + '&pageSize=20&sort=startDate&sortDirection=DESC&active=false', {headers: {Accept: "*/*"}})
+        fetch( 'http://57.128.195.196:8080/api/league?currentPage=' + page + '&pageSize=20&sort=startDate&sortDirection=DESC&active=false', {headers: {Accept: "*/*"}})
             .then(response => response.json())
-            .then(result => setArchiveSeasonsList(result.content.map(item => <li key={item.id} className='my-2'><Link to={'/events/season/'+ item.id}>{item.name}</Link></li>)))
-        fetch( 'http://57.128.195.196:8080/api/league/paginated?currentPage=' + nextPage + '&pageSize=20&sort=startDate&sortDirection=DESC&active=false', {headers: {Accept: "*/*"}})
+            .then(result => setArchiveSeasonsList(result.content.map(item => <li key={item.id} className='my-2 truncate'><Link to={'/events/season/'+ item.id}>{item.name}</Link></li>)))
+        fetch( 'http://57.128.195.196:8080/api/league?currentPage=' + nextPage + '&pageSize=20&sort=startDate&sortDirection=DESC&active=false', {headers: {Accept: "*/*"}})
             .then(response => response.json())
             //.then(result => result.content.length ? setNextPage(false) : setNextPage(true))
             .then(result => setNextPageLength(result.content.length))
