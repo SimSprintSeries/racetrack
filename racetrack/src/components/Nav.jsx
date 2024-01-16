@@ -10,7 +10,6 @@ const Nav = props => {
     const navButtonStyle = 'text-color text-center font-thin hover:-translate-y-1 ease-linear duration-100 lg:block p-4'
 
     const [navVisibility, setNavVisibility] = useState(false);
-    const [navStyleClass, setNavStyleClass] = useState('none');
     const location = useLocation();
 
     useEffect(() => {
@@ -37,11 +36,6 @@ const Nav = props => {
     }
 
     const switchNavVisibility = () => {
-        if(navVisibility) {
-            setNavStyleClass('none')
-        } else if (!navVisibility) {
-            setNavStyleClass('flex')
-        }
         setNavVisibility(!navVisibility);
     }
 
@@ -49,7 +43,7 @@ const Nav = props => {
         <header id='section0' className="flex p-4 place-items-center gap-4">
             <NavLink to="/"><img src={logo} alt="sim sprint series logo" className="flex lg:w-[675px] mix-blend-screen"/></NavLink>
             <button onClick={() => switchNavVisibility()} className='text-color z-50 text-4xl'><div className='flex flex-col gap-1'><div className='w-[.75em] bg-color h-0.5'></div><div className='w-[.75em] bg-color h-0.5'></div><div className='w-[.75em] bg-color h-0.5'></div></div></button>
-            <nav className='flex flex-col flex-grow-1 lg:flex-row fixed right-0 top-0 bg-nav pl-4 pr-16 box-content h-full z-40 ease-linear duration-100 w-auto' style={{display: navStyleClass}}>
+            <nav className={'flex flex-col flex-grow-1 lg:flex-row fixed right-0 top-0 bg-nav box-content h-full z-40 ease-linear duration-100 overflow-hidden ' + `${navVisibility ? 'pl-4 pr-16' : 'w-0'}`}>
                 <NavLink to="/events" className={navButtonStyle}>SEZONY</NavLink>
                 <a href='https://discord.com/invite/gVHE7Sf' target='_blank' className={navButtonStyle}>DISCORD</a>
                 <NavLink to="/stats" className={navButtonStyle} >STATYSTYKI</NavLink>

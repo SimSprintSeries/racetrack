@@ -1,29 +1,36 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
+import axios from "axios";
 
 
 const ArchiveSeasons = () => {
     const [archiveSeasonsList, setArchiveSeasonsList] = useState()
     const [page, setPage] = useState(0)
-    const [nextPage, setNextPage] = useState(1)
     const [nextPageLength, setNextPageLength] = useState(1)
 
     useEffect(() => {
-        fetch( 'http://57.128.195.196:8080/api/league?currentPage=' + page + '&pageSize=20&sort=startDate&sortDirection=DESC&active=false', {headers: {Accept: "*/*"}})
-            .then(response => response.json())
-            .then(result => setArchiveSeasonsList(result.content.map(item => <li key={item.id} className='my-2 truncate'><Link to={'/events/season/'+ item.id}>{item.name}</Link></li>)))
-        fetch( 'http://57.128.195.196:8080/api/league?currentPage=' + nextPage + '&pageSize=20&sort=startDate&sortDirection=DESC&active=false', {headers: {Accept: "*/*"}})
-            .then(response => response.json())
-            //.then(result => result.content.length ? setNextPage(false) : setNextPage(true))
-            .then(result => setNextPageLength(result.content.length))
+        axios.get('http://57.128.195.196:8080/api/league', {
+            params: {
+                currentPage: page,
+                pageSize: 20,
+                sort: 'startDate',
+                sortDirection: 'DESC',
+                active: false
+            }
+        })
+            .then(response => response.data)
+            .then(result => {
+                setArchiveSeasonsList(result.content.map(item => <li key={item.id} className='my-2 truncate'><Link to={'/events/season/'+ item.id + '/races'}>{item.name}</Link></li>))
+                return result.content.length
+            })
+            .then(result => result < 20 ? setNextPageLength(0) : setNextPageLength(1))
+
     }, [page])
 
     const changePage = x => {
         setPage(page+x);
-        setNextPage(page + x + 1)
     }
-
 
     return (
         <div className='flex flex-col text-color w-full h-screen p-8 pt-0'>

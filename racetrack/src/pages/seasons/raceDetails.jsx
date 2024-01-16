@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import axios from "axios";
 
 
 const RaceDetails = () => {
@@ -7,8 +8,15 @@ const RaceDetails = () => {
     const [raceResults, setRaceResults] = useState();
 
     useEffect(() => {
-        fetch( 'http://57.128.195.196:8080/api/raceresult?currentPage=0&pageSize=30&sort=finishPosition&raceId=' + raceId, {headers: {Accept: "*/*"}})
-            .then(response => response.json())
+        axios.get('http://57.128.195.196:8080/api/raceresult', {
+            params: {
+                currentPage: 0,
+                pageSize: 40,
+                sort: 'finishPosition',
+                raceId: raceId
+            }
+        })
+            .then(response => response.data)
             .then(result => setRaceResults(result.content.map(item => <RaceResultPosition key={item.id} {...item}></RaceResultPosition> )))
     }, [raceId])
 

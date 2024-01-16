@@ -1,4 +1,5 @@
 import React, {Component, useEffect, useState} from "react";
+import axios from "axios";
 
 class Events extends Component {
     render() {
@@ -16,8 +17,16 @@ const Event = () => {
     const [nextEventDate, setNextEventDate] = useState();
 
     useEffect(() => {
-        fetch("http://57.128.195.196:8080/api/race?currentPage=0&pageSize=1&sort=startDate&sortDirection=DESC&completed=false", {headers: {Accept: "*/*"}})
-            .then(response => response.json())
+        axios.get('http://57.128.195.196:8080/api/race', {
+            params: {
+                currentPage: 0,
+                pageSize: 1,
+                sort: 'startDate',
+                sortDirection: 'DESC',
+                completed: false
+            }
+        })
+            .then(response => response.data)
             .then(result => {
                 setNextEventName(result.content[0].split.league.game.name + ' Liga ' + result.content[0].split.name)
                 setNextEventDate(result.content[0].startDate)

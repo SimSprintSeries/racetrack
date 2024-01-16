@@ -2,13 +2,15 @@ import { Routes, Route } from 'react-router-dom';
 import Home from "../pages/Home.jsx";
 import {Login} from "./Login";
 import StatsPanel from "../pages/statsPanel.jsx";
-import DriverPanel from "../pages/driverPanel.jsx";
-import EventsPanel from "../pages/eventsPanel.jsx";
-import ActiveSeasons from "../pages/activeSeasons.jsx";
-import ArchiveSeasons from "../pages/archiveSeasons.jsx";
-import ActiveSeasonDetails from "../pages/activeSeasonDetails";
-import EventDetails from "../pages/eventDetails.jsx";
-import RaceDetails from "../pages/raceDetails.jsx";
+import DriverPanel from "../pages/seasons/driverPanel.jsx";
+import EventsPanel from "../pages/seasons/eventsPanel.jsx";
+import ActiveSeasons from "../pages/seasons/activeSeasons.jsx";
+import ArchiveSeasons from "../pages/seasons/archiveSeasons.jsx";
+import ActiveSeasonDetails from "../pages/seasons/activeSeasonDetails.jsx";
+import EventDetails from "../pages/seasons/eventDetails.jsx";
+import RaceDetails from "../pages/seasons/raceDetails.jsx";
+import ActiveSeasonsRaces from "../pages/seasons/activeSeasonRaces.jsx";
+import ClassificationDetails from "../pages/seasons/classificationDetails.jsx";
 
 const PageContent = () => {
     return (
@@ -27,10 +29,14 @@ const PageContent = () => {
                     </Route>
                 </Route>
                 <Route path='season'>
-                    <Route path=':seasonId'>
-                        <Route path='' element={<ActiveSeasonDetails/>}></Route>
-                        <Route path='event/:eventId' element={<EventDetails/>}></Route>
-                        <Route path='race/:raceId' element={<RaceDetails/>}></Route>
+                    <Route path=':seasonId' element={<ActiveSeasonDetails/>}>
+                        <Route path='races'>
+                            <Route path='' element={<ActiveSeasonsRaces/>}></Route>
+                            <Route path='event/:eventId' element={<EventDetails/>}></Route>
+                            <Route path='race/:raceId' element={<RaceDetails/>}></Route>
+                        </Route>
+                        <Route path='classification' element={<ClassificationDetails/>}></Route>
+                        <Route path='drivers'></Route>
                     </Route>
                 </Route>
             </Route>
