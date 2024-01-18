@@ -11,6 +11,7 @@ import EventDetails from "../pages/seasons/eventDetails.jsx";
 import RaceDetails from "../pages/seasons/raceDetails.jsx";
 import ActiveSeasonsRaces from "../pages/seasons/activeSeasonRaces.jsx";
 import ClassificationDetails from "../pages/seasons/classificationDetails.jsx";
+import SeasonDriversDetails from "../pages/seasons/seasonDriversDetails.jsx";
 
 const PageContent = () => {
     return (
@@ -36,7 +37,7 @@ const PageContent = () => {
                             <Route path='race/:raceId' element={<RaceDetails/>}></Route>
                         </Route>
                         <Route path='classification' element={<ClassificationDetails/>}></Route>
-                        <Route path='drivers'></Route>
+                        <Route path='drivers' element={<SeasonDriversDetails/>}></Route>
                     </Route>
                 </Route>
             </Route>
