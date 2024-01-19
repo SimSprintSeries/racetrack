@@ -7,13 +7,15 @@ const EventDetails = () => {
     const {eventId} = useParams();
     const [raceList, setRaceList] = useState();
     const [raceDetails, setRaceDetails] = useState({});
+    const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         axios.get('http://57.128.195.196:8080/api/event/' + eventId)
             .then(response => response.data)
             .then(result => setRaceDetails({
                 'displayText': result.displayText,
-                'startDate': result.startDate
+                'startDate': result.startDate,
+                'presenceActive': result.activeForPresence
             }))
         axios.get('http://57.128.195.196:8080/api/race/event/' + eventId, {
             params: {
@@ -24,18 +26,20 @@ const EventDetails = () => {
         })
             .then(response => response.data)
             .then(result => setRaceList(result.content.map(item => <RaceTile key={item.id} id={item.id} name={item.split.name}></RaceTile> )))
+            .then(() => setIsLoaded(true))
     }, [eventId])
 
 
     return (
-        <div>
+        <div>{ isLoaded ? <div>
             <h1 className='p-4 pb-0 text-color text-2xl' >{raceDetails.displayText}</h1>
             <h1 className='p-4 pb-2 text-color text-l font-thin'>{raceDetails.startDate}</h1>
-            <ButtonPresence/>
-            <h1 className='p-2 pb-0 text-color text-xl font-thin text-center'>Splity:</h1>
+            {raceDetails.presenceActive ? <ButtonPresence/> : ''}
+            <h1 className='p-2 pb-0 text-color text-xl font-thin text-center'>{raceList.length ? 'Wyniki:' : ''}</h1>
             <div className='text-color flex flex-col lg:flex-row w-full h-screen p-8 space-y-4 grow'>
-            {raceList ? raceList : 'brak'}
+                {raceList}
             </div>
+        </div> : ''}
         </div>
 
     )
