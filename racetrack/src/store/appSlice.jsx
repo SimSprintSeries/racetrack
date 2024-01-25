@@ -1,17 +1,18 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, current} from "@reduxjs/toolkit";
 import React from "react";
 
 const appSlice = createSlice({
     name: 'pageData',
     initialState: {
-        isLoaded: false
+        isDiscordLogged: false,
+        apiServer: ['http://57.128.195.196:8080/api']
     },
     reducers: {
-        toggleLoaded: (state, action) => {
-            state.isLoaded = action.payload
+        toggleLoginState: (state) => {
+            state.isDiscordLogged = !state.current.isDiscordLogged
         }
     }
 })
 
-export const {toggleLoaded} = appSlice.actions
+export const {toggleLoginState} = appSlice.actions
 export default appSlice.reducer

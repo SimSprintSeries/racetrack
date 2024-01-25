@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
+import {useSelector} from "react-redux";
 
 
 const ActiveSeasonsRaces = () => {
     const {seasonId} = useParams();
     const [eventList, setEventList] = useState();
     const [nextEvent, setNextEvent] = useState({track: {name: ''}})
+    const API_SERVER = useSelector(state => state.storeData.apiServer)
 
     useEffect(() => {
-        axios.get('http://57.128.195.196:8080/api/event', {
+        axios.get(API_SERVER + '/event', {
             params: {
                 currentPage: 0,
                 pageSize: 20,
@@ -20,7 +22,7 @@ const ActiveSeasonsRaces = () => {
             .then(response => response.data)
             .then(result => setEventList(result.content.map(item => <EventTile key={item.id} id={item.id} name={item.track.name} seasonId={seasonId} country={item.track.country}></EventTile> )))
 
-        axios.get('http://57.128.195.196:8080/api/league/nextEvent', {
+        axios.get(API_SERVER + '/league/nextEvent', {
             params: {
                 leagueId: seasonId
             }

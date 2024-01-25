@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const SeasonRules = () => {
     const [seasonRules, setSeasonRules] = useState()
+    const API_SERVER = useSelector(state => state.storeData.apiServer)
 
     const {seasonId} = useParams()
 
     useEffect(() => {
-        axios.get('http://57.128.195.196:8080/api/league/' + seasonId)
+        axios.get(API_SERVER + '/league/' + seasonId)
             .then(response => {
-                axios.get('http://57.128.195.196:8080/api/rules/' + response.data.game.gameFamily.name.toLowerCase())
+                axios.get(API_SERVER + '/rules/' + response.data.game.gameFamily.name.toLowerCase())
                     .then(response => response.data)
                     .then(result => setSeasonRules(result))
             })

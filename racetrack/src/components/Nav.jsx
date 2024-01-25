@@ -1,9 +1,9 @@
-import { useSignOut, useIsAuthenticated } from "react-auth-kit"
+import {useSignOut, useIsAuthenticated} from "react-auth-kit"
 import logo from '../images/ssslogo.png'
 import {NavLink, useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 
-const Nav = props => {
+const Nav = () => {
     const signOut = useSignOut()
     const isAuthenticated = useIsAuthenticated()
     const loginButtonStyle = 'text-color px-12 py-4 font-thin hover:bg-color hover:text-green ease-linear duration-100'
@@ -21,7 +21,7 @@ const Nav = props => {
     async function onSubmit() {
         try {
             window.location.href =
-              "http://57.128.195.196:8080/api/login/oauth2/code/discord";
+              "http://57.128.195.196:8080/api/oauth2/authorization/discord";
         } catch (error) {
             console.log(error)
         }

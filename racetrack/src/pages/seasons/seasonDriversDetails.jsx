@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
+import {useSelector} from "react-redux";
 
 
 const SeasonDriversDetails = () => {
     const {seasonId} = useParams();
     const [seasonResults, setSeasonResults] = useState();
+    const API_SERVER = useSelector(state => state.storeData.apiServer)
 
     useEffect(() => {
-        axios.get('http://57.128.195.196:8080/api/driver/league/' + seasonId,
+        axios.get(API_SERVER + '/driver/league/' + seasonId,
             {
                 params: {
                     currentPage: 0,

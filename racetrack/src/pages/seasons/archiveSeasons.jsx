@@ -2,15 +2,17 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import axios from "axios";
+import {useSelector} from "react-redux";
 
 
 const ArchiveSeasons = () => {
     const [archiveSeasonsList, setArchiveSeasonsList] = useState()
     const [page, setPage] = useState(0)
     const [nextPageLength, setNextPageLength] = useState(1)
+    const API_SERVER = useSelector(state => state.storeData.apiServer)
 
     useEffect(() => {
-        axios.get('http://57.128.195.196:8080/api/league', {
+        axios.get(API_SERVER + '/league', {
             params: {
                 currentPage: page,
                 pageSize: 20,

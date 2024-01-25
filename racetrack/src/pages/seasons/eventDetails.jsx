@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
+import {useSelector} from "react-redux";
 
 
 const EventDetails = () => {
@@ -8,16 +9,17 @@ const EventDetails = () => {
     const [raceList, setRaceList] = useState();
     const [raceDetails, setRaceDetails] = useState({});
     const [isLoaded, setIsLoaded] = useState(false)
+    const API_SERVER = useSelector(state => state.storeData.apiServer)
 
     useEffect(() => {
-        axios.get('http://57.128.195.196:8080/api/event/' + eventId)
+        axios.get(API_SERVER + '/event/' + eventId)
             .then(response => response.data)
             .then(result => setRaceDetails({
                 'displayText': result.displayText,
                 'startDate': result.startDate,
                 'presenceActive': result.activeForPresence
             }))
-        axios.get('http://57.128.195.196:8080/api/race/event/' + eventId, {
+        axios.get(API_SERVER + '/race/event/' + eventId, {
             params: {
                 currentPage: 0,
                 pageSize: 20,
