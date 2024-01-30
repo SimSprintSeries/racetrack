@@ -1,5 +1,6 @@
 import React, {Component, useEffect, useState} from "react";
 import axios from "axios";
+import {useSelector} from "react-redux";
 
 class Events extends Component {
     render() {
@@ -14,10 +15,10 @@ class Events extends Component {
 
 const Event = () => {
     const [nextEventName, setNextEventName] = useState();
-    const [nextEventDate, setNextEventDate] = useState();
+    const API_SERVER = useSelector(state => state.storeData.apiServer)
 
     useEffect(() => {
-        axios.get('http://57.128.195.196:8080/api/race', {
+        axios.get(API_SERVER + '/race', {
             params: {
                 currentPage: 0,
                 pageSize: 1,
@@ -27,20 +28,21 @@ const Event = () => {
             }
         })
             .then(response => response.data)
-            .then(result => {
-                setNextEventName(result.content[0].split.league.game.name + ' Liga ' + result.content[0].split.name)
-                setNextEventDate(result.content[0].startDate)
-            } )
+            .then(result =>
+                setNextEventName(result.content.map(item => item))
+             )
             .catch(err => console.log(err))
     }, [])
-
 
     return (
         <div>
             <div className="text-2xl p-4 pb-12 text-color text-center">Najbliższe wydarzenie</div>
             <div className="flex w-full items-center justify-center">
-                <div className=''><div className='bg-bg w-[190px] h-[190px] text-color grid place-content-center rounded-[5px] self-center mr-9'>{nextEventName}</div></div>
-                <a href="" className="grid place-content-center text-xl text-color w-1/4">Monza {nextEventDate}</a>
+                <div className=''>
+                    <div
+                        className='bg-bg w-[190px] h-[190px] text-color grid place-content-center rounded-[5px] self-center mr-9'>{nextEventName ? nextEventName[0].split.league.name : null}</div>
+                </div>
+                <div className="grid place-content-center text-xl text-color w-1/4">{nextEventName ? nextEventName[0].startDate : null}</div>
             </div>
         </div>
     )

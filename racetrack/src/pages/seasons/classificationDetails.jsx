@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {useSelector} from "react-redux";
+import LoadingSpinner from "../../components/loadingSpinner.jsx";
 
 
 const ClassificationDetails = () => {
@@ -9,6 +10,7 @@ const ClassificationDetails = () => {
     const [seasonResults, setSeasonResults] = useState();
     const [teamSeasonResults, setTeamSeasonResults] = useState();
     const API_SERVER = useSelector(state => state.storeData.apiServer)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios.get(API_SERVER + '/classification',
@@ -22,6 +24,8 @@ const ClassificationDetails = () => {
             })
             .then(result => result.data)
             .then(response => setSeasonResults(response.content.map((item, index) => <ClassificationPosition pos={index} key={item.driver.id} {...item}></ClassificationPosition> )))
+            .then(() => setIsLoading(false))
+
         axios.get(API_SERVER + '/classification/team',
             {
                 params: {
@@ -38,24 +42,26 @@ const ClassificationDetails = () => {
 
 
     return (
-        <div className='text-color grid grid-cols-1 place-items-center w-full h-screen p-3 grow'>
-            {seasonResults ? <div className='m-2'><h1 className='text-center text-lg'>Klasyfikacja generalna</h1>
-                <div className='grid grid-cols-[.6fr_2.2fr_1.8fr_1fr] justify-center w-full p-2'>
-                <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Lp.</h1>
-                <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Kierowca</h1>
-                <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Team</h1>
-                <h1 className='text-center font-thin border-color border-[1px]'>Pkt.</h1>
-            </div>
-                {seasonResults}
-                <h1 className='text-center text-lg mt-8'>Klasyfikacja drużynowa</h1>
-                <div className='grid grid-cols-[.6fr_4fr_1fr] justify-center w-full p-2'>
-                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Lp.</h1>
-                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Team</h1>
-                    <h1 className='text-center font-thin border-color border-[1px]'>Pkt.</h1>
-                </div>
-                {teamSeasonResults}
-            </div> : 'Chwilka...'}
-        </div>
+        <>
+            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full h-screen p-3 grow'>
+                {seasonResults ? <div className='m-2'><h1 className='text-center text-lg'>Klasyfikacja generalna</h1>
+                    <div className='grid grid-cols-[.6fr_2.2fr_1.8fr_1fr] justify-center w-full p-2'>
+                        <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Lp.</h1>
+                        <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Kierowca</h1>
+                        <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Team</h1>
+                        <h1 className='text-center font-thin border-color border-[1px]'>Pkt.</h1>
+                    </div>
+                    {seasonResults}
+                    <h1 className='text-center text-lg mt-8'>Klasyfikacja drużynowa</h1>
+                    <div className='grid grid-cols-[.6fr_4fr_1fr] justify-center w-full p-2'>
+                        <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Lp.</h1>
+                        <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Team</h1>
+                        <h1 className='text-center font-thin border-color border-[1px]'>Pkt.</h1>
+                    </div>
+                    {teamSeasonResults}
+                </div> : 'Brak danych :('}
+            </div> : <LoadingSpinner/>}
+        </>
     )
 }
 

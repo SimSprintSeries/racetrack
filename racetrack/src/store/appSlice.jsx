@@ -5,7 +5,7 @@ const appSlice = createSlice({
     name: 'pageData',
     initialState: {
         isDiscordLogged: false,
-        apiServer: ['http://57.128.195.196:8080/api']
+        apiServer: ['https://rocktune.pl/api']
     },
     reducers: {
         toggleLoginState: (state) => {

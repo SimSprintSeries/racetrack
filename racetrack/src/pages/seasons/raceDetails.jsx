@@ -2,12 +2,14 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import {useSelector} from "react-redux";
+import LoadingSpinner from "../../components/loadingSpinner.jsx";
 
 
 const RaceDetails = () => {
     const {raceId} = useParams();
     const [raceResults, setRaceResults] = useState();
     const API_SERVER = useSelector(state => state.storeData.apiServer)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios.get(API_SERVER + '/raceresult', {
@@ -20,21 +22,24 @@ const RaceDetails = () => {
         })
             .then(response => response.data)
             .then(result => setRaceResults(result.content.map(item => <RaceResultPosition key={item.id} {...item}></RaceResultPosition> )))
+            .then(() => setIsLoading(false))
     }, [raceId])
 
 
     return (
-        <div className='text-color grid grid-cols-1 place-items-center w-full h-screen p-3 grow'>
-            {raceResults ? <div className='grid grid-cols-[.6fr_3.1fr_1fr_1fr_1fr_1fr] justify-center w-full p-2'>
-                <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Lp.</h1>
-                <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Kierowca</h1>
-                <h1 className='text-center font-thin border-color border-[1px] border-r-0'>PP</h1>
-                <h1 className='text-center font-thin border-color border-[1px] border-r-0'>FL</h1>
-                <h1 className='text-center font-thin border-color border-[1px] border-r-0'>DNF</h1>
-                <h1 className='text-center font-thin border-color border-[1px]'>Pkt.</h1>
-            </div> : 'Brak wyników'}
-            {raceResults}
-        </div>
+        <>
+            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full h-screen p-3 grow'>
+                {raceResults ? <div className='grid grid-cols-[.6fr_3.1fr_1fr_1fr_1fr_1fr] justify-center w-full p-2'>
+                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Lp.</h1>
+                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Kierowca</h1>
+                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>PP</h1>
+                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>FL</h1>
+                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>DNF</h1>
+                    <h1 className='text-center font-thin border-color border-[1px]'>Pkt.</h1>
+                </div> : 'Brak wyników'}
+                {raceResults}
+            </div> : <LoadingSpinner/>}
+        </>
     )
 }
 

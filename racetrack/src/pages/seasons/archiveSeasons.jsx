@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import axios from "axios";
 import {useSelector} from "react-redux";
+import LoadingSpinner from "../../components/loadingSpinner.jsx";
 
 
 const ArchiveSeasons = () => {
@@ -10,6 +11,7 @@ const ArchiveSeasons = () => {
     const [page, setPage] = useState(0)
     const [nextPageLength, setNextPageLength] = useState(1)
     const API_SERVER = useSelector(state => state.storeData.apiServer)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios.get(API_SERVER + '/league', {
@@ -27,6 +29,7 @@ const ArchiveSeasons = () => {
                 return result.content.length
             })
             .then(result => result < 20 ? setNextPageLength(0) : setNextPageLength(1))
+            .then(() => setIsLoading(false))
 
     }, [page])
 
@@ -35,14 +38,22 @@ const ArchiveSeasons = () => {
     }
 
     return (
-        <div className='flex flex-col text-color w-full h-screen p-8 pt-0'>
-            <h1 className='text-center text-2xl mb-4'>Archiwalne sezony</h1>
-            <ul className='list-disc list-outside'>{archiveSeasonsList}</ul>
-            <div className='w-full flex gap-12 items-center justify-center grow'>
-                <button onClick={() => changePage(-1)} className='py-2 px-4 border-color border-[1px] rounded-2xl disabled:opacity-50' disabled={!page}>Poprzednia</button>
-                <button onClick={() => changePage(1)} className='py-2 px-4 border-color border-[1px] rounded-2xl disabled:opacity-50' disabled={!nextPageLength}>Następna</button>
-            </div>
-            </div>
+        <>
+            { !isLoading ? <div className='flex flex-col text-color w-full h-screen p-8 pt-0'>
+                <h1 className='text-center text-2xl mb-4'>Archiwalne sezony</h1>
+                <ul className='list-disc list-outside'>{archiveSeasonsList}</ul>
+                <div className='w-full flex gap-12 items-center justify-center grow'>
+                    <button onClick={() => changePage(-1)}
+                            className='py-2 px-4 border-color border-[1px] rounded-2xl disabled:opacity-50'
+                            disabled={!page}>Poprzednia
+                    </button>
+                    <button onClick={() => changePage(1)}
+                            className='py-2 px-4 border-color border-[1px] rounded-2xl disabled:opacity-50'
+                            disabled={!nextPageLength}>Następna
+                    </button>
+                </div>
+            </div> : <LoadingSpinner/>}
+        </>
     )
 }
 

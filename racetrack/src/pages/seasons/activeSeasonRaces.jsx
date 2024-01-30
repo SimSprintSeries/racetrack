@@ -9,6 +9,7 @@ const ActiveSeasonsRaces = () => {
     const [eventList, setEventList] = useState();
     const [nextEvent, setNextEvent] = useState({track: {name: ''}})
     const API_SERVER = useSelector(state => state.storeData.apiServer)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios.get(API_SERVER + '/event', {
@@ -28,18 +29,24 @@ const ActiveSeasonsRaces = () => {
             }
         })
             .then(response => setNextEvent(response.data))
+            .then(() => setIsLoading(false))
     }, [seasonId])
 
 
     return (
-        <div className='flex text-color flex-col w-full h-screen p-8'>
-            Kolejny wyścig:
+        <>
+            { !isLoading ? <div className='flex text-color flex-col w-full h-screen p-8'>
+            {nextEvent ? <div className='flex text-color flex-col'>
+                Kolejny wyścig:
                 <NextEventTile {...nextEvent} seasonId={seasonId} />
+            </div> : ''}
             <h1 className='mb-2'>Lista wyścigów:</h1>
             <div className='text-color flex flex-col lg:flex-row gap-y-1 grow'>
                 {eventList}
             </div>
-        </div>
+            </div> : null
+            }
+        </>
 
     )
 }
