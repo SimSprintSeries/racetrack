@@ -44,19 +44,19 @@ const ClassificationDetails = () => {
     return (
         <>
             { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full h-screen p-3 grow'>
-                {seasonResults ? <div className='m-2'><h1 className='text-center text-lg'>Klasyfikacja generalna</h1>
-                    <div className='grid grid-cols-[.6fr_2.2fr_1.8fr_1fr] justify-center w-full p-2'>
-                        <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Lp.</h1>
-                        <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Kierowca</h1>
-                        <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Team</h1>
-                        <h1 className='text-center font-thin border-color border-[1px]'>Pkt.</h1>
+                {seasonResults ? <div className='m-2'><h1 className='text-center text-lg '>Klasyfikacja generalna</h1>
+                    <div className='grid grid-cols-[.6fr_2.2fr_1.8fr_1fr] justify-center w-full p-2 border-b-[1px] border-gray-400'>
+                        <h1 className='text-center font-thin border-color'>Lp.</h1>
+                        <h1 className='text-center font-thin border-color'>Kierowca</h1>
+                        <h1 className='text-center font-thin border-color'>Team</h1>
+                        <h1 className='text-center font-thin border-color'>Pkt.</h1>
                     </div>
                     {seasonResults}
                     <h1 className='text-center text-lg mt-8'>Klasyfikacja drużynowa</h1>
-                    <div className='grid grid-cols-[.6fr_4fr_1fr] justify-center w-full p-2'>
-                        <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Lp.</h1>
-                        <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Team</h1>
-                        <h1 className='text-center font-thin border-color border-[1px]'>Pkt.</h1>
+                    <div className='grid grid-cols-[.6fr_4fr_1fr] justify-center w-full p-2 border-b-[1px] border-gray-400'>
+                        <h1 className='text-center font-thin border-color'>Lp.</h1>
+                        <h1 className='text-center font-thin border-color'>Team</h1>
+                        <h1 className='text-center font-thin border-color'>Pkt.</h1>
                     </div>
                     {teamSeasonResults}
                 </div> : 'Brak danych :('}

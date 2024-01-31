@@ -1,23 +1,35 @@
-import {useSignOut, useIsAuthenticated} from "react-auth-kit"
 import logo from '../images/ssslogo.png'
 import {NavLink, useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {toggleLoginState} from "../store/appSlice.tsx";
+import Cookies from 'js-cookie';
+import axios from "axios";
 
 const Nav = () => {
-    const signOut = useSignOut()
-    const isAuthenticated = useIsAuthenticated()
     const loginButtonStyle = 'text-color px-12 py-4 font-thin hover:bg-color hover:text-green ease-linear duration-100'
     const navButtonStyle = 'text-color text-center font-thin hover:-translate-y-1 ease-linear duration-100 lg:block p-4'
-
     const [navVisibility, setNavVisibility] = useState(false);
     const location = useLocation();
     const API_SERVER = useSelector(state => state.storeData.apiServer)
+
+    const dispatch = useDispatch()
+    const isUserLogged = useSelector(state => state.storeData.isDiscordLogged)
+
+    const checkUserSession = (token) => {
+        if(token !== undefined) {
+            dispatch(toggleLoginState(true))
+        } else {
+            dispatch(toggleLoginState(false))
+        }
+    }
+
 
     useEffect(() => {
         if(navVisibility) {
             switchNavVisibility();
         }
+        checkUserSession(Cookies.get('token'))
     }, [location])
 
     async function onSubmit() {
@@ -29,9 +41,25 @@ const Nav = () => {
         }
     }
 
+    const logOut = () => {
+        axios.post(API_SERVER + '/login/oauth2/code/discord/revoke', null, {
+            params: {
+                token: Cookies.get('token')
+            }
+        })
+            .then(response => {
+                if(response.request.status === 200) {
+                    Cookies.remove('token', {path: ''})
+                    window.location.href = "/"
+                }
+            })
+            .catch(ex => console.log(ex))
+    }
+
+
     function displayLoginLogout() {
-        if (isAuthenticated()) {
-            return <button className={loginButtonStyle} onClick={() => signOut()}>WYLOGUJ</button>
+        if (isUserLogged) {
+            return <button className={loginButtonStyle} onClick={() => logOut()}>WYLOGUJ</button>
         } else {
             return <button className={loginButtonStyle} onClick={() => onSubmit()}>ZALOGUJ</button>
         }
