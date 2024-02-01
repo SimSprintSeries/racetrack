@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import axios from "axios";
 import {RootState} from "../store/store";
 import Cookies from 'js-cookie';
+// @ts-ignore
 import LoadingSpinner from "./loadingSpinner.jsx";
 
 function Login() {

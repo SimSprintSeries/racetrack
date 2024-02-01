@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {useSelector} from "react-redux";
+import LoadingSpinner from "../../components/loadingSpinner.jsx";
 
 
 const ActiveSeasonsRaces = () => {
@@ -35,16 +36,16 @@ const ActiveSeasonsRaces = () => {
 
     return (
         <>
-            { !isLoading ? <div className='flex text-color flex-col w-full h-screen p-8'>
+            { !isLoading ? <div className='flex text-color flex-col w-full p-8'>
             {nextEvent ? <div className='flex text-color flex-col'>
                 Kolejny wyścig:
                 <NextEventTile {...nextEvent} seasonId={seasonId} />
             </div> : ''}
             <h1 className='mb-2'>Lista wyścigów:</h1>
-            <div className='text-color flex flex-col lg:flex-row gap-y-1 grow'>
+            <div className='text-color flex flex-col  gap-y-2 grow lg:max-w-[50%]'>
                 {eventList}
             </div>
-            </div> : null
+            </div> : <LoadingSpinner/>
             }
         </>
 
@@ -55,7 +56,7 @@ const EventTile = props => {
 
     return (
 
-        <div className='bg-bg/35 p-3 truncate relative -skew-x-12 rounded-md'>
+        <div className=' p-3 truncate relative -skew-x-12 rounded-md hover:-translate-y-1 duration-100 bg-gradient-to-bl from-bg/10 to-bg/75'>
             <Link to={'/events/season/' + props.seasonId + '/races/event/' + props.id}>
             <h1 className='skew-x-12'>{props.name}</h1>
                 <img className='absolute top-[-6px] right-0 scale-[2] opacity-20 gradient-mask-l-0' src={"https://flagsapi.com/" + props.country + "/flat/64.png"} alt={props.country}/>
@@ -67,7 +68,7 @@ const EventTile = props => {
 
 const NextEventTile = props => {
         return (
-            <Link to={'/events/season/' + props.seasonId + '/races/event/' + props.id} className='w-full p-4 border-color border-[1px] my-4 rounded-lg bg-color/20'>
+            <Link to={'/events/season/' + props.seasonId + '/races/event/' + props.id} className='w-full p-4 border-color border-[1px] my-4 rounded-lg bg-color/20 '>
                 <h1 className='font-thin'>{props.displayText}</h1>
                 <h1 className='text-xl'>{props.track.name}</h1>
                 <h1 className='font-thin text-sm text-right mt-2'>{props.startDate}</h1>

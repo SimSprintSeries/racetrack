@@ -10,6 +10,7 @@ const EventDetails = () => {
     const [raceDetails, setRaceDetails] = useState({});
     const [isLoaded, setIsLoaded] = useState(false)
     const API_SERVER = useSelector(state => state.storeData.apiServer)
+    const isUserLogged = useSelector(state => state.storeData.isDiscordLogged)
 
     useEffect(() => {
         axios.get(API_SERVER + '/event/' + eventId)
@@ -31,12 +32,19 @@ const EventDetails = () => {
             .then(() => setIsLoaded(true))
     }, [eventId])
 
+    const displayPresenceButton = () => {
+        if(raceDetails.presenceActive && isUserLogged) {
+            return <ButtonPresence/>
+        } else {
+            return null
+        }
+    }
 
     return (
         <div>{ isLoaded ? <div>
             <h1 className='p-4 pb-0 text-color text-2xl' >{raceDetails.displayText}</h1>
             <h1 className='p-4 pb-2 text-color text-l font-thin'>{raceDetails.startDate}</h1>
-            {raceDetails.presenceActive ? <ButtonPresence/> : ''}
+            {displayPresenceButton()}
             <h1 className='p-2 pb-0 text-color text-xl font-thin text-center'>{raceList.length ? 'Wyniki:' : ''}</h1>
             <div className='text-color flex flex-col lg:flex-row w-full h-screen p-8 space-y-4 grow'>
                 {raceList}

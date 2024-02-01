@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 class Events extends Component {
     render() {
         return (
-            <div className="flex flex-col justify-center items-center font-thin">
+            <div className="flex flex-col justify-center items-center lg:w-1/2 font-thin">
                 <Event/>
                 <LastEvent/>
             </div>
@@ -25,6 +25,9 @@ const Event = () => {
                 sort: 'startDate',
                 sortDirection: 'DESC',
                 completed: false
+            },
+            headers: {
+                'Access-Control-Allow-Origin' : true
             }
         })
             .then(response => response.data)
@@ -53,7 +56,7 @@ const LastEvent = () => {
         <div>
             <div className="text-2xl p-16 pb-12 text-color">Najnowsza transmisja</div>
             <div className="flex w-full items-center justify-center">
-                <iframe className='aspect-video w-5/6 mb-16' src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug" title='LiveStream' allowFullScreen></iframe>
+                <iframe className='aspect-video w-5/6 lg:w-full mb-16' src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug" title='LiveStream' allowFullScreen></iframe>
             </div>
         </div>
     )

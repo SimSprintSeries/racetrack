@@ -29,7 +29,7 @@ const SeasonDriversDetails = () => {
 
     return (
         <>
-            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full h-screen p-3 grow'>
+            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full p-3 grow'>
                 {seasonResults ? <div className='grid grid-cols-[2.9fr_2.8fr] justify-center w-full p-2 border-b-[1px] border-gray-400'>
                     <h1 className='text-center font-thin'>Kierowca</h1>
                     <h1 className='text-center font-thin '>Team</h1>

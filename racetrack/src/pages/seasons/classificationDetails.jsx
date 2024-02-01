@@ -43,7 +43,7 @@ const ClassificationDetails = () => {
 
     return (
         <>
-            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full h-screen p-3 grow'>
+            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full p-3 grow'>
                 {seasonResults ? <div className='m-2'><h1 className='text-center text-lg '>Klasyfikacja generalna</h1>
                     <div className='grid grid-cols-[.6fr_2.2fr_1.8fr_1fr] justify-center w-full p-2 border-b-[1px] border-gray-400'>
                         <h1 className='text-center font-thin border-color'>Lp.</h1>

@@ -12,7 +12,7 @@ const SocialMedia = () => {
     return (
         <div className='flex flex-col items-center px-8'>
             <p className='text-color lg:text-[24px] font-thin'>Nasze sociale:</p>
-            <div className='flex space-x-10 justify-center items-center mt-4 lg:mt-16'>
+            <div className='flex space-x-10 justify-center items-center mt-4 lg:mt-4'>
                 <a href=""><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="2em" height="2em" viewBox="0 0 30 30">
                     <path fill="#ffffff" d="M15,3C8.373,3,3,8.373,3,15c0,6.016,4.432,10.984,10.206,11.852V18.18h-2.969v-3.154h2.969v-2.099c0-3.475,1.693-5,4.581-5 c1.383,0,2.115,0.103,2.461,0.149v2.753h-1.97c-1.226,0-1.654,1.163-1.654,2.473v1.724h3.593L19.73,18.18h-3.106v8.697 C22.481,26.083,27,21.075,27,15C27,8.373,21.627,3,15,3z"></path>
                 </svg></a>
@@ -35,12 +35,12 @@ const SocialMedia = () => {
 
 const Sponsors = () => {
     return (
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center lg:mt-2'>
             <p className='text-color lg:text-[24px] mt-4 font-thin'>Współpracujemy z:</p>
             <div className='flex space-x-10 justify-center items-center mt-4'>
-                <a className='max-w-[20%]' href=""><img src="https://1000logos.net/wp-content/uploads/2021/05/LetyShops-logo.png" alt="Letyshops"/></a>
-                <a className='max-w-[20%]' href=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Logo_g2a_white.svg/1200px-Logo_g2a_white.svg.png" alt="G2A"/></a>
-                <a className='max-w-[20%]' href=""><img src="https://racetracks.pl/wp-content/uploads/2022/08/cropped-logo-new-bez-tla.png" alt="Racetracks.pl"/></a>
+                <a className='max-w-[20%] lg:max-w-[10%]' href=""><img src="https://1000logos.net/wp-content/uploads/2021/05/LetyShops-logo.png" alt="Letyshops"/></a>
+                <a className='max-w-[20%] lg:max-w-[10%]' href=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Logo_g2a_white.svg/1200px-Logo_g2a_white.svg.png" alt="G2A"/></a>
+                <a className='max-w-[20%] lg:max-w-[10%]' href=""><img src="https://racetracks.pl/wp-content/uploads/2022/08/cropped-logo-new-bez-tla.png" alt="Racetracks.pl"/></a>
             </div>
         </div>
     )
@@ -49,7 +49,7 @@ const Sponsors = () => {
 const Patronite = () => {
     return (
         <div className='flex justify-center mt-4 items-center h-full'>
-            <a href=""><img width='160px' src="https://d3mi06r82nxl9g.cloudfront.net/files/logotypes/png/patronite-PNG-02-white.png" alt="Patronite"/></a>
+            <a className='max-w-[80%] lg:mt-1 lg:max-w-[15%]' href=""><img src="https://d3mi06r82nxl9g.cloudfront.net/files/logotypes/png/patronite-PNG-02-white.png" alt="Patronite"/></a>
         </div>
     )
 }
