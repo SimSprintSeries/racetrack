@@ -22,7 +22,7 @@ const ActiveSeasons = () => {
     }, [])
 
     return (
-        <div className='text-color flex flex-col w-full h-screen p-16 space-y-4 lg:flex-row lg:space-y-0 '>
+        <div className='text-color flex flex-col w-full grow p-16 space-y-4 lg:flex-row lg:space-y-0 '>
             {activeSeasonsList}
             </div>
     )

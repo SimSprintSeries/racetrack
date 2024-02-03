@@ -8,7 +8,7 @@ import store from "./store/store.tsx";
 const App = () => {
     return (
         <Provider store={store}>
-            <div className='h-screen flex flex-col'>
+            <div className='min-h-screen flex flex-col'>
                 <Nav/>
                 <PageContent/>
             </div>

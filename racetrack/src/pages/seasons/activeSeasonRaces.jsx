@@ -71,7 +71,14 @@ const NextEventTile = props => {
             <Link to={'/events/season/' + props.seasonId + '/races/event/' + props.id} className='w-full p-4 border-color border-[1px] my-4 rounded-lg bg-color/20 '>
                 <h1 className='font-thin'>{props.displayText}</h1>
                 <h1 className='text-xl'>{props.track.name}</h1>
-                <h1 className='font-thin text-sm text-right mt-2'>{props.startDate}</h1>
+                <h1 className='font-thin text-sm text-right mt-2'>{new Date(props.startDate).toLocaleString('pl-PL', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    timeZone: 'UTC'
+                })}</h1>
             </Link>
         )
 }

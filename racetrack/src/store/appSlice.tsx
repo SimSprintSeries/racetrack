@@ -3,13 +3,29 @@ import {createSlice} from "@reduxjs/toolkit";
 interface IAppState {
     isDiscordLogged: boolean,
     apiServer: string
-    userData: object
+    userData: IUserData
+}
+
+export interface IUserData {
+    id: number,
+    username: string,
+    displayName: string,
+    avatar: string,
+    driverId: number
+}
+
+const userDataInitialState: IUserData = {
+    id: 0,
+    username: '',
+    displayName: '',
+    avatar: '',
+    driverId: 0
 }
 
 const initialState: IAppState = {
     isDiscordLogged: false,
     apiServer: 'https://rocktune.pl/api',
-    userData: {id: 0, username: '', displayName: '', avatar: ''}
+    userData: userDataInitialState
 }
 
 const appSlice = createSlice({
@@ -27,3 +43,5 @@ const appSlice = createSlice({
 
 export const {toggleLoginState, saveUserData} = appSlice.actions
 export default appSlice.reducer
+
+

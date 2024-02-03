@@ -23,6 +23,7 @@ const SeasonDriversDetails = () => {
             .then(result => result.data)
             .then(response => setSeasonResults(response.content.map((item, index) => <DriverTile pos={index} key={item.id} {...item}></DriverTile> )))
             .then(() => setIsLoading(false))
+            .catch(ex => console.log(ex))
 
     }, [])
 

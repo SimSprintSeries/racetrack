@@ -45,7 +45,14 @@ const Event = () => {
                     <div
                         className='bg-bg w-[190px] h-[190px] text-color grid place-content-center rounded-[5px] self-center mr-9'>{nextEventName ? nextEventName[0].split.league.name : null}</div>
                 </div>
-                <div className="grid place-content-center text-xl text-color w-1/4">{nextEventName ? nextEventName[0].startDate : null}</div>
+                <div className="grid place-content-center text-xl text-color w-1/4">{nextEventName ? new Date(nextEventName[0].startDate).toLocaleDateString('pl-PL', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    timeZone: 'UTC'
+                }) : null}</div>
             </div>
         </div>
     )

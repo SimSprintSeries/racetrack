@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from "../pages/Home.jsx";
 import {Login} from "./Login";
 import StatsPanel from "../pages/statsPanel.jsx";
-import DriverPanel from "../pages/seasons/driverPanel.jsx";
+import DriverPanel from "../pages/driverPanel/driverPanel";
 import EventsPanel from "../pages/seasons/eventsPanel.jsx";
 import ActiveSeasons from "../pages/seasons/activeSeasons.jsx";
 import ArchiveSeasons from "../pages/seasons/archiveSeasons.jsx";
