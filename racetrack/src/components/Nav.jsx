@@ -34,7 +34,6 @@ const Nav = () => {
                         avatar: response.data.avatar,
                         driverId: response.data.driverId
                     }))
-                    console.log(response)
                 })
                 .catch(ex => console.log(ex))
         } else {
@@ -107,7 +106,7 @@ const Nav = () => {
                 <NavLink to="/" className={navButtonStyle} >AKTUALNOŚCI</NavLink>
                 {isUserLogged ? <NavLink to="/driver" className={navButtonStyle + ' flex gap-x-4 items-center justify-start'}>
                     <div className='relative'>
-                        <img className='w-7 h-7 rounded-full' src={`https://cdn.discordapp.com/avatars/${userBasicInfo.id}/${userBasicInfo.avatar}`} alt=""/>
+                        <img className='w-7 h-7 rounded-full' src={`https://cdn.discordapp.com/avatars/${userBasicInfo.id}/${userBasicInfo.avatar}.png?size=160`} alt=""/>
                     </div>{userBasicInfo.username.toUpperCase()}</NavLink> : null}
                 <div className='lg:flex  '>{displayLoginLogout()}</div>
             </nav>

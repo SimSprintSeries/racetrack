@@ -7,7 +7,7 @@ interface IAppState {
 }
 
 export interface IUserData {
-    id: number,
+    id: string,
     username: string,
     displayName: string,
     avatar: string,
@@ -15,7 +15,7 @@ export interface IUserData {
 }
 
 const userDataInitialState: IUserData = {
-    id: 0,
+    id: '',
     username: '',
     displayName: '',
     avatar: '',
