@@ -13,6 +13,8 @@ import ActiveSeasonsRaces from "../pages/seasons/activeSeasonRaces.jsx";
 import ClassificationDetails from "../pages/seasons/classificationDetails.jsx";
 import SeasonDriversDetails from "../pages/seasons/seasonDriversDetails.jsx";
 import SeasonRules from "../pages/seasons/seasonRules.jsx";
+import {NotFoundPage} from "./NotFoundPage";
+import OtherDriverPanel from "../pages/driverPanel/otherDriverPanel";
 
 const PageContent = () => {
     return (
@@ -20,7 +22,11 @@ const PageContent = () => {
             <Route path='/' element={<Home/>}/>
             <Route path='/login' element={<Login/>} />
             <Route path='/stats' element={<StatsPanel/>} />
-            <Route path='/driver' element={<DriverPanel/>} />
+            <Route path='/driver'>
+                <Route path='' element={<DriverPanel/>}>
+                </Route>
+                <Route path=':driverId' element={<OtherDriverPanel/>}></Route>
+            </Route>
             <Route path='/events'>
                 <Route index={true} element={<EventsPanel/>}></Route>
                 <Route path='activeSeasons' >
@@ -43,6 +49,7 @@ const PageContent = () => {
                     </Route>
                 </Route>
             </Route>
+            <Route path='*' element={<NotFoundPage/>}/>
         </Routes>
     )
 }

@@ -9,7 +9,7 @@ import LoadingSpinner from "../../components/loadingSpinner.jsx";
 const ArchiveSeasons = () => {
     const [archiveSeasonsList, setArchiveSeasonsList] = useState()
     const [page, setPage] = useState(0)
-    const [nextPageLength, setNextPageLength] = useState(1)
+    const [nextPageLength, setNextPageLength] = useState(false)
     const API_SERVER = useSelector(state => state.storeData.apiServer)
     const [isLoading, setIsLoading] = useState(true)
 
@@ -26,9 +26,8 @@ const ArchiveSeasons = () => {
             .then(response => response.data)
             .then(result => {
                 setArchiveSeasonsList(result.content.map(item => <li key={item.id} className='my-2 truncate'><Link to={'/events/season/'+ item.id + '/races'}>{item.name}</Link></li>))
-                return result.content.length
+                setNextPageLength(result.last)
             })
-            .then(result => result < 20 ? setNextPageLength(0) : setNextPageLength(1))
             .then(() => setIsLoading(false))
 
     }, [page])
@@ -49,7 +48,7 @@ const ArchiveSeasons = () => {
                     </button>
                     <button onClick={() => changePage(1)}
                             className='py-2 px-4 border-color border-[1px] rounded-2xl disabled:opacity-50'
-                            disabled={!nextPageLength}>Następna
+                            disabled={nextPageLength}>Następna
                     </button>
                 </div>
             </div> : <LoadingSpinner/>}

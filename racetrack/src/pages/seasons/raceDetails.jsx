@@ -28,14 +28,14 @@ const RaceDetails = () => {
 
     return (
         <>
-            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full h-screen p-3 grow'>
-                {raceResults ? <div className='grid grid-cols-[.6fr_3.1fr_1fr_1fr_1fr_1fr] justify-center w-full p-2'>
-                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Lp.</h1>
-                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>Kierowca</h1>
-                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>PP</h1>
-                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>FL</h1>
-                    <h1 className='text-center font-thin border-color border-[1px] border-r-0'>DNF</h1>
-                    <h1 className='text-center font-thin border-color border-[1px]'>Pkt.</h1>
+            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full p-3 grow'>
+                {raceResults ? <div className='grid grid-cols-[.6fr_3.1fr_1fr_1fr_1fr_1fr] justify-center w-full p-2 border-b-[1px] border-gray-400'>
+                    <h1 className='text-center font-thin'>Lp.</h1>
+                    <h1 className='text-center font-thin'>Kierowca</h1>
+                    <h1 className='text-center font-thin'>PP</h1>
+                    <h1 className='text-center font-thin'>FL</h1>
+                    <h1 className='text-center font-thin'>DNF</h1>
+                    <h1 className='text-center font-thin'>Pkt.</h1>
                 </div> : 'Brak wyników'}
                 {raceResults}
             </div> : <LoadingSpinner/>}

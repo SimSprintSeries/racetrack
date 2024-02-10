@@ -79,7 +79,7 @@ const ButtonPresence = () => {
 
     return (
         <div className='flex justify-center p-2'>
-            <label onClick={() => handleClick()} htmlFor='presence' className={'p-2 px-4 border-color border-[1px] rounded-xl ease-linear duration-100 ' + `${presence ? 'bg-color text-bg' : 'bg-none text-color'}`} >Zaznacz Obecność</label>
+            <label onClick={() => handleClick()} htmlFor='presence' className={'p-2 px-4 border-color border-[1px] rounded-xl ease-linear duration-100 w-1/2 text-center ' + `${presence ? 'bg-color text-bg' : 'bg-none text-color'}`} >{presence ? 'Odznacz obecność' : 'Zaznacz obecność'}</label>
             <input id='presence' name='presence' className='hidden' type="checkbox"/>
         </div>
     )

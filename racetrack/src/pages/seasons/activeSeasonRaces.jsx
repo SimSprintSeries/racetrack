@@ -22,7 +22,7 @@ const ActiveSeasonsRaces = () => {
             }
         })
             .then(response => response.data)
-            .then(result => setEventList(result.content.map(item => <EventTile key={item.id} id={item.id} name={item.track.name} seasonId={seasonId} country={item.track.country}></EventTile> )))
+            .then(result => setEventList(result.content.map(item => <EventTile key={item.id} id={item.id} name={item.displayText} trackname={item.track.name} seasonId={seasonId} country={item.track.country}></EventTile> )))
 
         axios.get(API_SERVER + '/league/nextEvent', {
             params: {
@@ -58,8 +58,8 @@ const EventTile = props => {
 
         <div className=' p-3 truncate relative -skew-x-12 rounded-md hover:-translate-y-1 duration-100 bg-gradient-to-bl from-bg/10 to-bg/75'>
             <Link to={'/events/season/' + props.seasonId + '/races/event/' + props.id}>
-            <h1 className='skew-x-12'>{props.name}</h1>
-                <img className='absolute top-[-6px] right-0 scale-[2] opacity-20 gradient-mask-l-0' src={"https://flagsapi.com/" + props.country + "/flat/64.png"} alt={props.country}/>
+                <div className='skew-x-12 flex flex-col'><span className='font-bold'>{props.name}</span><span className='text-[0.8em] ml-2 text-color/55'>{props.trackname}</span></div>
+                <img className='absolute top-0 right-0 scale-[2] opacity-20 gradient-mask-l-0' src={"https://flagsapi.com/" + props.country + "/flat/64.png"} alt={props.country}/>
             </Link>
         </div>
 
@@ -68,7 +68,7 @@ const EventTile = props => {
 
 const NextEventTile = props => {
         return (
-            <Link to={'/events/season/' + props.seasonId + '/races/event/' + props.id} className='w-full p-4 border-color border-[1px] my-4 rounded-lg bg-color/20 '>
+            <Link to={'/events/season/' + props.seasonId + '/races/event/' + props.id} className='w-full p-4 border-color my-4 rounded-lg bg-color/10 '>
                 <h1 className='font-thin'>{props.displayText}</h1>
                 <h1 className='text-xl'>{props.track.name}</h1>
                 <h1 className='font-thin text-sm text-right mt-2'>{new Date(props.startDate).toLocaleString('pl-PL', {

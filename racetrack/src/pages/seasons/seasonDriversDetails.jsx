@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import LoadingSpinner from "../../components/loadingSpinner.jsx";
@@ -44,11 +44,11 @@ const SeasonDriversDetails = () => {
 const DriverTile = props => {
 
     return (
-        <div className='grid grid-cols-[.1fr_2.8fr_2.8fr] justify-center w-full p-2'>
-            <div style={{backgroundColor: '#'+props.team.colour}}></div>
+        <Link to={'/driver/' + props.id} className='grid grid-cols-[.1fr_2.8fr_2.8fr] justify-center w-full p-2'>
+            <div style={props.team ? {backgroundColor: '#'+props.team.colour} : null}></div>
             <h1 className='truncate ml-2'>{props.nickname}</h1>
-            <h1 className='truncate ml-2'>{props.team.name}</h1>
-        </div>
+            <h1 className='truncate ml-2'>{props.team ? props.team.name : null}</h1>
+        </Link>
     )
 }
 

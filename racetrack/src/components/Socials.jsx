@@ -3,7 +3,7 @@ const Socials = () => {
         <div className='flex flex-col mt-4 max-h-[10vh]'>
             <SocialMedia/>
             <Sponsors/>
-            <Patronite  />
+            <Patronite/>
         </div>
     )
 }

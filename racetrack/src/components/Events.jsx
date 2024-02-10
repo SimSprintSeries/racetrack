@@ -61,7 +61,7 @@ const Event = () => {
 const LastEvent = () => {
     return (
         <div>
-            <div className="text-2xl p-16 pb-12 text-color">Najnowsza transmisja</div>
+            <div className="text-2xl p-16 pb-12 text-color text-center">Ostatnia transmisja</div>
             <div className="flex w-full items-center justify-center">
                 <iframe className='aspect-video w-5/6 lg:w-full mb-16' src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug" title='LiveStream' allowFullScreen></iframe>
             </div>

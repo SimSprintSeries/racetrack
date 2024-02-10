@@ -21,6 +21,7 @@ const Nav = () => {
         if(token !== undefined) {
             dispatch(toggleLoginState(true))
 
+            if (userBasicInfo.id === '') {
             axios.get(API_SERVER + '/user/basic', {
                 headers: {
                     Authorization: `Bearer ${Cookies.get('token')}`
@@ -35,7 +36,7 @@ const Nav = () => {
                         driverId: response.data.driverId
                     }))
                 })
-                .catch(ex => console.log(ex))
+                .catch(ex => console.log(ex)) }
         } else {
             dispatch(toggleLoginState(false))
         }

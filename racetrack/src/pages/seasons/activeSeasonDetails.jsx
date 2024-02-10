@@ -33,7 +33,7 @@ const ActiveSeasonsDetails = () => {
                     </li>
                 </ul>
             </div>
-            <div className='bg-bg/50 min-h-full grow'><Outlet /></div>
+            <div className='bg-gradient-to-b from-bg/40 to-bg/55 min-h-full grow'><Outlet /></div>
         </>
 
     )
