@@ -1,9 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from "../pages/Home.jsx";
 import {Login} from "./Login";
-import StatsPanel from "../pages/statsPanel.jsx";
+import StatsPanel from "../pages/statsPanel.tsx";
 import DriverPanel from "../pages/driverPanel/driverPanel";
-import EventsPanel from "../pages/seasons/eventsPanel.jsx";
 import ActiveSeasons from "../pages/seasons/activeSeasons.jsx";
 import ArchiveSeasons from "../pages/seasons/archiveSeasons.jsx";
 import ActiveSeasonDetails from "../pages/seasons/activeSeasonDetails.jsx";
@@ -15,6 +14,7 @@ import SeasonDriversDetails from "../pages/seasons/seasonDriversDetails.jsx";
 import SeasonRules from "../pages/seasons/seasonRules.jsx";
 import {NotFoundPage} from "./NotFoundPage";
 import OtherDriverPanel from "../pages/driverPanel/otherDriverPanel";
+import AdminPanelMain from "../pages/adminPanel/adminPanelMain";
 
 const PageContent = () => {
     return (
@@ -28,7 +28,6 @@ const PageContent = () => {
                 <Route path=':driverId' element={<OtherDriverPanel/>}></Route>
             </Route>
             <Route path='/events'>
-                <Route index={true} element={<EventsPanel/>}></Route>
                 <Route path='activeSeasons' >
                     <Route path='' element={<ActiveSeasons/>}></Route>
                 </Route>
@@ -49,6 +48,7 @@ const PageContent = () => {
                     </Route>
                 </Route>
             </Route>
+            <Route path='/admin' element={<AdminPanelMain/>} />
             <Route path='*' element={<NotFoundPage/>}/>
         </Routes>
     )

@@ -35,7 +35,8 @@ const SeasonDriversDetails = () => {
                     <h1 className='text-center font-thin'>Kierowca</h1>
                     <h1 className='text-center font-thin '>Team</h1>
                 </div> : 'Brak danych :('}
-                {seasonResults}
+                <ul className='list-none w-full'>{seasonResults}</ul>
+
             </div> : <LoadingSpinner/>}
         </>
     )
@@ -44,11 +45,13 @@ const SeasonDriversDetails = () => {
 const DriverTile = props => {
 
     return (
-        <Link to={'/driver/' + props.id} className='grid grid-cols-[.1fr_2.8fr_2.8fr] justify-center w-full p-2'>
-            <div style={props.team ? {backgroundColor: '#'+props.team.colour} : null}></div>
-            <h1 className='truncate ml-2'>{props.nickname}</h1>
-            <h1 className='truncate ml-2'>{props.team ? props.team.name : null}</h1>
-        </Link>
+        <li>
+            <Link to={'/driver/' + props.id} className='grid grid-cols-[.1fr_2.8fr_2.8fr] justify-center w-full p-2'>
+                <div style={props.team ? {backgroundColor: '#'+props.team.colour} : null}></div>
+                <h1 className='truncate ml-2'>{props.nickname}</h1>
+                <h1 className='truncate ml-2'>{props.team ? props.team.name : null}</h1>
+            </Link>
+        </li>
     )
 }
 

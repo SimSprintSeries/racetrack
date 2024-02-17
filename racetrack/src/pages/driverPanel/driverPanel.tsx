@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
-import {IUserData} from "../../store/appSlice";
+import {IUserData, APIObject} from "../../store/appSlice";
 import axios from "axios";
 // @ts-ignore
 import LoadingSpinner from "../../components/loadingSpinner";
 import {Link} from "react-router-dom";
-
-interface APIObject {
-    [key: string]: any
-}
+import {ChangePageButtonLeft, ChangePageButtonRight} from "../../components/changePageButtons";
 
 const DriverPanel = () => {
 
@@ -133,11 +130,11 @@ const DriverSeasons = (props: {driverId: number, api: string}) => {
         <div className='px-4 pt-4 border-b-[1px] border-color/50'>
             <span className='text-sm text-color/75'>Moje sezony</span>
             <div className='px-0 py-4 flex min-h-[12em]'>
-                <button className='bg-color/85 text-bg rounded-md opacity-75 w-4 disabled:opacity-0' onClick={() => changePage(-1)} disabled={!page}>◂</button>
+                <ChangePageButtonLeft onClickFn={() => changePage(-1)} disabledVar={!page} />
             <div className='flex flex-col grow px-4 overflow-auto'>
                 {driverSeasons}
             </div>
-                <button className='bg-color/85 text-bg rounded-md opacity-75 w-4 disabled:opacity-0' onClick={() => changePage(1)} disabled={lastPage}>▸</button>
+                <ChangePageButtonRight onClickFn={() => changePage(1)} disabledVar={lastPage} />
             </div>
         </div>
     )
@@ -177,11 +174,11 @@ const DriverReports = (props: {driverId: number, api: string}) => {
         <div className='px-4 pt-4'>
             <span className='text-sm text-color/75'>Moje zgłoszenia</span>
             <div className='px-0 py-4 flex min-h-[12em]'>
-                <button className='bg-color/85 text-bg rounded-md opacity-75 w-4 disabled:opacity-0' onClick={() => changePage(-1)} disabled={!page}>◂</button>
+                <ChangePageButtonLeft onClickFn={() => changePage(-1)} disabledVar={!page} />
                 <div className='flex flex-col grow px-4 '>
                     {driverReports.length ? driverReports : 'Brak zgłoszeń'}
                 </div>
-                <button className='bbg-color/85 text-bg rounded-md opacity-75 w-4 disabled:opacity-0' onClick={() => changePage(1)} disabled={lastPage}>▸</button>
+                <ChangePageButtonRight onClickFn={() => changePage(1)} disabledVar={lastPage} />
             </div>
         </div>
     )

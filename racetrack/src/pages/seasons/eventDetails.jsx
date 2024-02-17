@@ -41,7 +41,7 @@ const EventDetails = () => {
     }
 
     return (
-        <div>{ isLoaded ? <div>
+        <>{ isLoaded ? <div className='w-full'>
             <h1 className='p-4 pb-0 text-color text-2xl' >{raceDetails.displayText}</h1>
             <h1 className='p-4 pb-2 text-color text-l font-thin'>{new Date(raceDetails.startDate).toLocaleString('en-GB', {
                 day: '2-digit',
@@ -50,11 +50,11 @@ const EventDetails = () => {
             })}</h1>
             {displayPresenceButton()}
             <h1 className='p-2 pb-0 text-color text-xl font-thin text-center'>{raceList.length ? 'Wyniki:' : ''}</h1>
-            <div className='text-color flex flex-col lg:flex-row w-full h-screen p-8 space-y-4 grow'>
+            <div className='text-color flex flex-col lg:flex-row w-full p-8 space-y-4 grow'>
                 {raceList}
             </div>
         </div> : ''}
-        </div>
+        </>
 
     )
 }

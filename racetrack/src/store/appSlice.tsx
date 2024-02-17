@@ -11,7 +11,12 @@ export interface IUserData {
     username: string,
     displayName: string,
     avatar: string,
-    driverId: number
+    driverId: number,
+    isAdmin: boolean
+}
+
+export interface APIObject {
+    [key: string]: any
 }
 
 const userDataInitialState: IUserData = {
@@ -19,7 +24,8 @@ const userDataInitialState: IUserData = {
     username: '',
     displayName: '',
     avatar: '',
-    driverId: 0
+    driverId: 0,
+    isAdmin: false
 }
 
 const initialState: IAppState = {

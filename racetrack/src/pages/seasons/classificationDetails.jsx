@@ -51,14 +51,14 @@ const ClassificationDetails = () => {
                         <h1 className='text-center font-thin border-color'>Team</h1>
                         <h1 className='text-center font-thin border-color'>Pkt.</h1>
                     </div>
-                    {seasonResults}
+                    <ul className='list-none w-full'>{seasonResults}</ul>
                     <h1 className='text-center text-lg mt-8 py-2 bg-gradient-to-r from-color/10 to-color/0 rounded'>Klasyfikacja drużynowa</h1>
                     <div className='grid grid-cols-[.6fr_4fr_1fr] justify-center w-full p-2 border-b-[1px] border-gray-400'>
                         <h1 className='text-center font-thin border-color'>Lp.</h1>
                         <h1 className='text-center font-thin border-color'>Team</h1>
                         <h1 className='text-center font-thin border-color'>Pkt.</h1>
                     </div>
-                    {teamSeasonResults}
+                    <ul className='list-none w-full'>{teamSeasonResults}</ul>
                 </div> : 'Brak danych :('}
             </div> : <LoadingSpinner/>}
         </>
@@ -68,25 +68,29 @@ const ClassificationDetails = () => {
 const ClassificationPosition = props => {
 
     return (
-        <div className='grid grid-cols-[.6fr_.1fr_2.2fr_1.8fr_1fr] justify-center w-full p-2'>
+        <li>
+            <div className='grid grid-cols-[.6fr_.1fr_2.2fr_1.8fr_1fr] justify-center w-full p-2'>
             <h1 className='text-l text-center'>{props.pos + 1}.</h1>
             <div style={props.team ? {backgroundColor: '#'+ props.team.colour} : null}></div>
             <h1 className='truncate ml-2'>{props.driver.nickname}</h1>
             <h1 className='truncate ml-2'>{props.team ? props.team.name : null}</h1>
             <h1 className='text-center'>{props.points}</h1>
-        </div>
+            </div>
+        </li>
     )
 }
 
 const TeamClassificationPosition = props => {
 
     return (
-        <div className='grid grid-cols-[.6fr_.1fr_4fr_1fr] justify-center w-full p-2'>
-            <h1 className='text-l text-center'>{props.pos + 1}.</h1>
-            <div style={props.team ? {backgroundColor: '#'+ props.team.colour} : null}></div>
-            <h1 className='truncate ml-2'>{props.team ? props.team.name : null}</h1>
-            <h1 className='text-center'>{props.points}</h1>
-        </div>
+        <li>
+            <div className='grid grid-cols-[.6fr_.1fr_4fr_1fr] justify-center w-full p-2'>
+                <h1 className='text-l text-center'>{props.pos + 1}.</h1>
+                <div style={props.team ? {backgroundColor: '#'+ props.team.colour} : null}></div>
+                <h1 className='truncate ml-2'>{props.team ? props.team.name : null}</h1>
+                <h1 className='text-center'>{props.points}</h1>
+            </div>
+        </li>
     )
 }
 
