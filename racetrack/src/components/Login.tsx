@@ -21,7 +21,7 @@ function Login() {
           const token = response.data.token
           let providedToken
             if(providedToken === undefined) {
-                Cookies.set('token', token, {expires: 7, secure: true})
+                Cookies.set('token', token, {expires: 6, secure: true})
                 providedToken = Cookies.get('token')
             }
             providedToken === undefined ? setIsLoginSuccess(false) : setIsLoginSuccess(true)

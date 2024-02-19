@@ -42,8 +42,8 @@ const OtherDriverPanel = () => {
 const OtherDriverMainInfo = (props: APIObject) => {
     return (
         <div className='text-2xl px-6 py-3 bg-bg/65 flex gap-x-3 items-center'>
-            <img className="w-16 h-16 rounded-full ring-2 ring-color"
-                 src={props.avatar ? `https://cdn.discordapp.com/avatars/${props.id}/${props.avatar}.png?size=160` : `https://ia903204.us.archive.org/4/items/discordprofilepictures/discordred.png`} alt="" />
+            <img className={"w-16 h-16 rounded-full ring-2 ring-color " + `${props.avatar ? '' : 'opacity-75'}`}
+                 src={props.avatar ? `https://cdn.discordapp.com/avatars/${props.id}/${props.avatar}.png?size=160` : `https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/discord-white-icon.png`} alt="" />
             <div>{props.name}</div>
         </div>
     )

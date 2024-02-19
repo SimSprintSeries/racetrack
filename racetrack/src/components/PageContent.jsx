@@ -15,6 +15,7 @@ import SeasonRules from "../pages/seasons/seasonRules.jsx";
 import {NotFoundPage} from "./NotFoundPage";
 import OtherDriverPanel from "../pages/driverPanel/otherDriverPanel";
 import AdminPanelMain from "../pages/adminPanel/adminPanelMain";
+import AdminTrackModule from "../pages/adminPanel/adminPanelTracks";
 
 const PageContent = () => {
     return (
@@ -48,7 +49,10 @@ const PageContent = () => {
                     </Route>
                 </Route>
             </Route>
-            <Route path='/admin' element={<AdminPanelMain/>} />
+            <Route path='/admin'>
+                <Route path='' element={<AdminPanelMain/>}></Route>
+                <Route path='trackPanel' element={<AdminTrackModule/>}></Route>
+            </Route>
             <Route path='*' element={<NotFoundPage/>}/>
         </Routes>
     )
