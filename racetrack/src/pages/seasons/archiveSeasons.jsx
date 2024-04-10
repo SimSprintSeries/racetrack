@@ -4,6 +4,7 @@ import {useState, useEffect} from "react";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import LoadingSpinner from "../../components/loadingSpinner.jsx";
+import {ChangePageButtonLeft, ChangePageButtonRight} from "../../components/changePageButtons";
 
 
 const ArchiveSeasons = () => {
@@ -38,18 +39,12 @@ const ArchiveSeasons = () => {
 
     return (
         <>
-            { !isLoading ? <div className='flex flex-col text-color w-full h-screen p-8 pt-0'>
+            { !isLoading ? <div className='flex flex-col text-color w-full p-8 pt-0 grow'>
                 <h1 className='text-center text-2xl mb-4'>Archiwalne sezony</h1>
-                <ul className='list-disc list-outside'>{archiveSeasonsList}</ul>
-                <div className='w-full flex gap-12 items-center justify-center grow'>
-                    <button onClick={() => changePage(-1)}
-                            className='py-2 px-4 border-color border-[1px] rounded-2xl disabled:opacity-50'
-                            disabled={!page}>Poprzednia
-                    </button>
-                    <button onClick={() => changePage(1)}
-                            className='py-2 px-4 border-color border-[1px] rounded-2xl disabled:opacity-50'
-                            disabled={nextPageLength}>Następna
-                    </button>
+                <ul className='list-disc list-outside grow'>{archiveSeasonsList}</ul>
+                <div className='w-full flex gap-12 items-center justify-center p-4'>
+                    <ChangePageButtonLeft disabledVar={!page} onClickFn={() => changePage(-1)}/>
+                    <ChangePageButtonRight disabledVar={nextPageLength} onClickFn={() => changePage(1)}/>
                 </div>
             </div> : <LoadingSpinner/>}
         </>

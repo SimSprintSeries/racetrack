@@ -16,6 +16,8 @@ import {NotFoundPage} from "./NotFoundPage";
 import OtherDriverPanel from "../pages/driverPanel/otherDriverPanel";
 import AdminPanelMain from "../pages/adminPanel/adminPanelMain";
 import AdminTrackModule from "../pages/adminPanel/adminPanelTracks";
+import ReportView from "../pages/reports/viewReport";
+import LeagueReports from "../pages/reports/leagueReports";
 
 const PageContent = () => {
     return (
@@ -46,8 +48,12 @@ const PageContent = () => {
                         <Route path='classification' element={<ClassificationDetails/>}></Route>
                         <Route path='drivers' element={<SeasonDriversDetails/>}></Route>
                         <Route path='rules' element={<SeasonRules/>}></Route>
+                        <Route path='reports' element={<LeagueReports/>}></Route>
                     </Route>
                 </Route>
+            </Route>
+            <Route path='report'>
+                <Route path='view/:reportId' element={<ReportView/>}/>
             </Route>
             <Route path='/admin'>
                 <Route path='' element={<AdminPanelMain/>}></Route>

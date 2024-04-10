@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 class Events extends Component {
     render() {
         return (
-            <div className="flex flex-col justify-center items-center lg:w-1/2 font-thin">
+            <div className="flex flex-col lg:flex-row min-w-full justify-center items-center lg:w-1/2 font-thin">
                 <Event/>
                 <LastEvent/>
             </div>
@@ -38,12 +38,18 @@ const Event = () => {
     }, [])
 
     return (
-        <div>
+        <div className='grow'>
             <div className="text-2xl p-4 pb-12 text-color text-center">Najbliższe wydarzenie</div>
             <div className="flex w-full items-center justify-center">
                 <div className=''>
                     <div
-                        className='bg-bg w-[190px] h-[190px] text-color grid place-content-center rounded-[5px] self-center mr-9'>{nextEventName ? nextEventName[0].split.league.name : null}</div>
+                        className='relative flex w-[190px] h-[190px] text-color justify-center items-center rounded-lg mr-9 bg-bg/35 overflow-hidden'
+                        >
+                        <span className='z-20'>{nextEventName ? nextEventName[0].split.league.name : null}</span>
+                        <div
+                            className='w-full h-full absolute top-0 left-0 bg-center bg-cover z-10 opacity-45 mix-blend-darken'
+                            style={{'backgroundImage': `url('${nextEventName ? nextEventName[0].split.league.banner : null}')`}}></div>
+                        </div>
                 </div>
                 <div className="grid place-content-center text-xl text-color w-1/4">{nextEventName ? new Date(nextEventName[0].startDate).toLocaleDateString('pl-PL', {
                     day: '2-digit',
@@ -60,10 +66,10 @@ const Event = () => {
 
 const LastEvent = () => {
     return (
-        <div>
+        <div className='flex flex-col lg:grow m-auto'>
             <div className="text-2xl p-16 pb-12 text-color text-center">Ostatnia transmisja</div>
             <div className="flex w-full items-center justify-center">
-                <iframe className='aspect-video w-5/6 lg:w-full mb-16' src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug" title='LiveStream' allowFullScreen></iframe>
+                <iframe className='aspect-video w-5/6  mb-16' src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug" title='LiveStream' allowFullScreen></iframe>
             </div>
         </div>
     )

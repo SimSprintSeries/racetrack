@@ -82,7 +82,7 @@ const StatsPanelElo = (props: APIObject) => {
     return (
         <div className='m-4 min-h-48 flex flex-col'>
             <div className='grid grid-cols-[1fr_5fr_3fr] gap-x-4 mb-2 pb-2 border-b-[1px] border-color/55'><span className='text-right'>Lp.</span><span className='ml-3'>Nickname</span><span className='text-center'>pkt.</span></div>
-            {!isLoading ? <ul className='list-none w-full'>{eloList}</ul> : <LoadingSpinner/>}
+            {!isLoading ? <ul className='list-none w-full'>{eloList.length ? eloList : <li className='flex'><span className='w-full text-center'>Brak danych</span></li>}</ul> : <LoadingSpinner/>}
         </div>
     )
 }

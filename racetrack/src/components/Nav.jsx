@@ -98,7 +98,6 @@ const Nav = () => {
 
     const switchSeasonVisibility = () => {
         setSeasonVisibility(!seasonVisibility)
-        console.log(seasonVisibility)
     }
 
     return (
@@ -111,7 +110,7 @@ const Nav = () => {
                     <div className={`w-[.75em] bg-color h-0.5 ease-linear duration-100 ` + `${navVisibility ? 'w-[.75em] -translate-y-[0.187rem] -rotate-45' : null}`}></div>
                 </div>
             </button>
-            <nav className={'flex flex-col flex-grow-1 lg:flex-row fixed lg:static right-0 top-0 bg-nav/95 lg:bg-nav/0 box-content h-full z-40 ease-linear backdrop-blur-sm duration-100 overflow-hidden ' + `${navVisibility ? 'pl-4 pr-16 lg:w-full lg:pl-0 lg:pr-0' : 'w-0 lg:w-full'}`}>
+            <nav className={'flex flex-col flex-grow-1 lg:flex-row fixed lg:static right-0 top-0 bg-nav/95 lg:bg-nav/0 box-content h-full z-40 ease-linear backdrop-blur-sm lg:backdrop-blur-none duration-100 overflow-hidden ' + `${navVisibility ? 'pl-4 pr-16 lg:w-full lg:pl-0 lg:pr-0' : 'w-0 lg:w-full'}`}>
 
                 <div>
                     <button onClick={() => switchSeasonVisibility()} className={navButtonStyle + `${seasonVisibility ? ' bg-color/15 w-full rounded-lg' : ''}`}>SEZONY</button>
