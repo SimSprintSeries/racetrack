@@ -20,6 +20,8 @@ export const SendReport = () => {
     const [selectedEvent, setSelectedEvent] = useState<string>('')
     const [driverOptions, setDriversOptions] = useState<[]>()
     const [selectedDriver, setSelectedDriver] = useState<string>('')
+    const [raceList, setRaceList] = useState<[]>()
+    const [selectedRace, setSelectedRace] = useState<string>('')
 
     const [lap, setLap] = useState<string>('')
     const [reportDesc, setReportDesc] = useState<string>('')
@@ -63,26 +65,16 @@ export const SendReport = () => {
 
     }, [selectedEvent])
 
+    useEffect(() => {
 
-    //handlery zmiany wartości w state dla pól
-    function handleEventChange(e: React.ChangeEvent<HTMLSelectElement>): void {
-        setSelectedEvent(e.target.value)
-    }
+        axios.get(API_SERVER + '/race/event/' + selectedEvent)
+            .then(response => setRaceList(response.data.content.map((item: APIObject) => <option className='text-bg text-color' key={item.id} value={item.id}>{item.displayText}</option>)))
+    },[selectedEvent])
 
-    function handleDriverChange(e: React.ChangeEvent<HTMLSelectElement>): void {
-        setSelectedDriver(e.target.value)
-    }
 
-    function handleLapChange(e: React.ChangeEvent<HTMLInputElement>): void {
-        setLap(e.target.value)
-    }
-
-    function handleDescChange(e: React.ChangeEvent<HTMLTextAreaElement>): void {
-        setReportDesc(e.target.value)
-    }
-
-    function handleLinkChange(e: React.ChangeEvent<HTMLTextAreaElement>): void {
-        setReportLinks(e.target.value)
+    //handler zmiany wartości w state dla pól
+    function handleFieldChange(e: any, fn: any): void {
+        fn(e.target.value)
     }
 
     // funkcja wysłania zgłoszenia
@@ -93,9 +85,9 @@ export const SendReport = () => {
             axios.post(API_SERVER + '/report', {
                 incidentLink: reportLinks,
                 incidentDescription: reportDesc,
-                reportingDriverId: String(userData.driverId),
-                reportedDriverId: selectedDriver,
-                raceId: selectedEvent,
+                reportingDriver: {id: String(userData.driverId)},
+                reportedDriver: {id: selectedDriver},
+                race: {id: selectedEvent},
                 checked: false
             })
                 .then(response => console.log(response))
@@ -106,10 +98,6 @@ export const SendReport = () => {
         }
     }
 
-
-
-
-
     return (
         <>
             {!isLoading ? <div className='flex flex-col text-color p-4 flex-wrap grow'>
@@ -117,26 +105,30 @@ export const SendReport = () => {
                 <h1 className='pb-2 mb-4 text-2xl'>Zgłoszenie incydentu</h1>
 
                 <form className='w-full flex flex-col grow'>
-                    <h1>Runda</h1>
-                    <select onChange={handleEventChange} value={selectedEvent} required className={inputStyleClass}>
+                    <h1>Runda i wyścig</h1>
+                    <select onChange={(e) => handleFieldChange(e, setSelectedEvent)} value={selectedEvent} required className={inputStyleClass}>
                         <option className='text-color' selected></option>
                         {raceOptions}
                     </select>
+                    <select onChange={(e) => handleFieldChange(e, setSelectedRace)} value={selectedRace} required className={inputStyleClass}>
+                        <option className='text-color' selected></option>
+                        {raceList}
+                    </select>
 
                     <h1>Kierowca zgłoszony</h1>
-                    <select onChange={handleDriverChange} value={selectedDriver} required className={inputStyleClass}>
+                    <select onChange={(e) => handleFieldChange(e, setSelectedDriver)} value={selectedDriver} required className={inputStyleClass}>
                         <option className='text-color' selected></option>
                         {driverOptions}
                     </select>
 
                     <h1>Numer okrążenia</h1>
-                    <input onChange={handleLapChange} value={lap} type="text" required className={inputStyleClass}/>
+                    <input onChange={(e) => handleFieldChange(e, setLap)} value={lap} type="text" required className={inputStyleClass}/>
 
                     <h1>Dowód</h1>
-                    <TextareaAutosize onChange={handleLinkChange} value={reportLinks} required className={inputStyleClass} />
+                    <TextareaAutosize onChange={(e) => handleFieldChange(e, setReportLinks)} value={reportLinks} required className={inputStyleClass} />
 
                     <h1>Opis incydentu</h1>
-                    <TextareaAutosize onChange={handleDescChange} value={reportDesc} required className={inputStyleClass + ' grow'} />
+                    <TextareaAutosize onChange={(e) => handleFieldChange(e, setReportDesc)} value={reportDesc} required className={inputStyleClass + ' grow'} />
 
                     <button type='submit' onClick={sendReportToDatabase}>Prześlij</button>
                     
