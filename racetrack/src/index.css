@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+#mainContainer {
     background-image: url('./images/bg.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -19,4 +19,13 @@ html {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+.gradient-bg {
+    background: linear-gradient(to right,
+    rgb(236 72 153 / 0.3),
+    rgb(59 130 246 / 0.4),
+    rgb(236 72 153 / 0.3),
+    rgb(59 130 246 / 0.4));
+    background-size: 300% 300%;
 }

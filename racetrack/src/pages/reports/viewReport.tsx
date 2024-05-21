@@ -48,6 +48,9 @@ const ReportView = () => {
 }
 
 const ReportDesc = (props: APIObject) => {
+
+    const adminCheck = useSelector((state: RootState) => state.storeData.userData.isAdmin)
+
     return (
         <>
             <div className='p-4 bg-bg/55 rounded-r-lg font-thin text-justify'>
@@ -63,7 +66,8 @@ const ReportDesc = (props: APIObject) => {
                 year: 'numeric'
             }) : 'Brak daty'}</span></div>
                 <div className='flex flex-col m-2'><span className='text-sm text-color/55'>Dowód</span><span className='font-light opacity-90'>{props.incidentLink}</span></div>
-            <div className='flex flex-col m-2'><span className='text-sm text-color/55'>Opis incydentu</span><span className='font-light opacity-90'>{props.incidentDescription}</span></div>
+                {adminCheck ? <div className='flex flex-col m-2'><span className='text-sm text-color/55'>Opis incydentu</span><span
+                    className='font-light opacity-90'>{props.incidentDescription}</span></div> : null}
             </div>
         </>
 

@@ -42,7 +42,7 @@ const StatsPanel = () => {
     return (
         <>
             {!isLoading ? <div className='text-color grow'>
-                <h1 className='text-center text-lg py-2 bg-gradient-to-r from-color/10 to-color/0 rounded m-4'>Top Elo Kierowcy</h1>
+                <h1 className='text-center text-lg py-2 bg-gradient-to-r from-color/10 to-color/0 my-4'>Top Elo Kierowcy</h1>
                 <div className='flex flex-row w-full'>
                     <ChangePageButtonLeft disabledVar={!currentGame} onClickFn={() => handleGameChange(-1)}/>
                     <div className='text-center text-lg w-16'>{games[currentGame].gameName}</div>

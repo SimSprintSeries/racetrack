@@ -18,6 +18,9 @@ import AdminPanelMain from "../pages/adminPanel/adminPanelMain";
 import AdminTrackModule from "../pages/adminPanel/adminPanelTracks";
 import ReportView from "../pages/reports/viewReport";
 import LeagueReports from "../pages/reports/leagueReports";
+import {AdminPanelSeason, AdminPanelSeasonManage} from "../pages/adminPanel/adminPanelSeason";
+import AdminPanelSeasonManagePage from "../pages/adminPanel/adminPanelSeasonManage";
+import {SendReport} from "../pages/reports/sendReport";
 
 const PageContent = () => {
     return (
@@ -54,10 +57,16 @@ const PageContent = () => {
             </Route>
             <Route path='report'>
                 <Route path='view/:reportId' element={<ReportView/>}/>
+                <Route path='send/:seasonId' element={<SendReport/>}/>
             </Route>
             <Route path='/admin'>
                 <Route path='' element={<AdminPanelMain/>}></Route>
                 <Route path='trackPanel' element={<AdminTrackModule/>}></Route>
+                <Route path='seasonPanel'>
+                    <Route path='' element={<AdminPanelSeason/>}></Route>
+                    <Route path='manageSeasons' element={<AdminPanelSeasonManage/>}></Route>
+                    <Route path='editSeason/:seasonId' element={<AdminPanelSeasonManagePage/>}></Route>
+                </Route>
             </Route>
             <Route path='*' element={<NotFoundPage/>}/>
         </Routes>

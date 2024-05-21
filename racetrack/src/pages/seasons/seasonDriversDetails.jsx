@@ -35,7 +35,7 @@ const SeasonDriversDetails = () => {
                     <h1 className='text-center font-thin'>Kierowca</h1>
                     <h1 className='text-center font-thin '>Team</h1>
                 </div> : 'Brak danych :('}
-                <ul className='list-none w-full'>{seasonResults}</ul>
+                <ul className='list-none w-full animate-slideLeft'>{seasonResults}</ul>
 
             </div> : <LoadingSpinner/>}
         </>

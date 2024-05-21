@@ -45,9 +45,9 @@ const Event = () => {
                     <div
                         className='relative flex w-[190px] h-[190px] text-color justify-center items-center rounded-lg mr-9 bg-bg/35 overflow-hidden'
                         >
-                        <span className='z-20'>{nextEventName ? nextEventName[0].split.league.name : null}</span>
+                        <span className='z-20 text-center'>{nextEventName ? nextEventName[0].split.league.name : null}</span>
                         <div
-                            className='w-full h-full absolute top-0 left-0 bg-center bg-cover z-10 opacity-45 mix-blend-darken'
+                            className='w-full h-full absolute top-0 left-0 bg-center bg-cover z-10 opacity-30'
                             style={{'backgroundImage': `url('${nextEventName ? nextEventName[0].split.league.banner : null}')`}}></div>
                         </div>
                 </div>
@@ -69,7 +69,7 @@ const LastEvent = () => {
         <div className='flex flex-col lg:grow m-auto'>
             <div className="text-2xl p-16 pb-12 text-color text-center">Ostatnia transmisja</div>
             <div className="flex w-full items-center justify-center">
-                <iframe className='aspect-video w-5/6  mb-16' src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug" title='LiveStream' allowFullScreen></iframe>
+                <iframe className='aspect-video w-5/6 mb-16 shadow-black/50 ' src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug" title='LiveStream' allowFullScreen></iframe>
             </div>
         </div>
     )

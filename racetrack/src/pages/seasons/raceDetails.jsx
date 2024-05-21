@@ -37,7 +37,7 @@ const RaceDetails = () => {
                     <h1 className='text-center font-thin'>DNF</h1>
                     <h1 className='text-center font-thin'>Pkt.</h1>
                 </div> : 'Brak wyników'}
-                {raceResults}
+                <ul className='animate-slideLeft list-none w-full'>{raceResults}</ul>
             </div> : <LoadingSpinner/>}
         </>
     )

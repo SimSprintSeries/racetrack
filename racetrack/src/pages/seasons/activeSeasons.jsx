@@ -7,6 +7,7 @@ import {useSelector} from "react-redux";
 const ActiveSeasons = () => {
     const [activeSeasonsList, setActiveSeasonsList] = useState();
     const API_SERVER = useSelector(state => state.storeData.apiServer)
+    const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         axios.get(API_SERVER + '/league', {
@@ -18,11 +19,12 @@ const ActiveSeasons = () => {
             }
         })
             .then(response => response.data)
-            .then(result => setActiveSeasonsList(result.content.map(item => <ActiveSeasonTile key={item.id} name={item.name} id={item.id} img={item.banner}></ActiveSeasonTile>)))
+            .then(result => setActiveSeasonsList(result.content.map((item, index) => <ActiveSeasonTile key={item.id} name={item.name} id={item.id} img={item.banner} index={index}></ActiveSeasonTile>)))
+            .then(() => setIsLoaded(true))
     }, [])
 
     return (
-        <div className='text-color flex flex-col w-full grow p-16 space-y-4 lg:flex-row lg:space-y-0 '>
+        <div className={`text-color flex flex-col w-full grow p-16 space-y-4 lg:flex-row lg:space-y-0`}>
             {activeSeasonsList}
             </div>
     )
@@ -31,9 +33,9 @@ const ActiveSeasonTile = props => {
     const seasonId = props.id
 
     return (
-        <Link to={'/events/season/'+ seasonId + '/races'} className='flex relative grow max-h-[33vh] bg-bg/50 items-center justify-center hover:cursor-pointer lg:border-[1px] border-color lg:max-h-fit rounded-lg'>
+        <Link to={'/events/season/'+ seasonId + '/races'} className={'flex relative grow max-h-[33vh] bg-bg/50 items-center justify-center hover:cursor-pointer lg:border-[1px] border-color lg:max-h-fit rounded-lg animate-slideUp'}>
             <h1 className='z-20'>{props.name}</h1>
-            <div className={`absolute right-0 top-0 w-full h-full aspect-auto z-10 rounded-lg bg-cover bg-center opacity-45 mix-blend-darken`} style={{'background-image': `url('${props.img}')`}}></div>
+            <div className={`absolute right-0 top-0 w-full h-full aspect-auto z-10 rounded-lg bg-cover bg-center opacity-30`} style={{'background-image': `url('${props.img}')`}}></div>
         </Link>
     )
 }

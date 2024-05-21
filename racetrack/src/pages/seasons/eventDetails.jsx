@@ -18,7 +18,8 @@ const EventDetails = () => {
             .then(result => setRaceDetails({
                 'displayText': result.displayText,
                 'startDate': result.startDate,
-                'presenceActive': result.activeForPresence
+                'presenceActive': result.activeForPresence,
+                'banner': result.league.banner
             }))
         axios.get(API_SERVER + '/race/event/' + eventId, {
             params: {
@@ -28,7 +29,7 @@ const EventDetails = () => {
             }
         })
             .then(response => response.data)
-            .then(result => setRaceList(result.content.map(item => <RaceTile key={item.id} id={item.id} name={item.split.name}></RaceTile> )))
+            .then(result => setRaceList(result.content.map(item => <RaceTile key={item.id} id={item.id} name={item.displayText}></RaceTile> )))
             .then(() => setIsLoaded(true))
     }, [eventId])
 
@@ -42,14 +43,17 @@ const EventDetails = () => {
 
     return (
         <>{ isLoaded ? <div className='w-full'>
-            <h1 className='p-4 pb-0 text-color text-2xl' >{raceDetails.displayText}</h1>
-            <h1 className='p-4 pb-2 text-color text-l font-thin'>{new Date(raceDetails.startDate).toLocaleString('en-GB', {
-                day: '2-digit',
-                month: 'long',
-                year: 'numeric'
-            })}</h1>
+            <div className='relative p-4'>
+                <h1 className='p-4 pb-0 text-color text-2xl' >{raceDetails.displayText}</h1>
+                <h1 className='p-4 pb-2 text-color text-l font-thin'>{new Date(raceDetails.startDate).toLocaleString('en-GB', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric'
+                })}</h1>
+                <div className='absolute top-0 left-0 w-full h-full -z-10 bg-cover opacity-35' style={{'background-image': `url('${raceDetails.banner}')`}}></div>
+            </div>
             {displayPresenceButton()}
-            <h1 className='p-2 pb-0 text-color text-xl font-thin text-center'>{raceList.length ? 'Wyniki:' : ''}</h1>
+
             <div className='text-color flex flex-col lg:flex-row w-full p-8 space-y-4 grow'>
                 {raceList}
             </div>
@@ -64,8 +68,8 @@ const RaceTile = props => {
     const {seasonId} = useParams();
 
     return (
-        <Link to={'/events/season/' + seasonId + '/races/race/' + raceId} className='flex justify-center p-2 bg-bg/35 rounded-xl '>
-            <h1 className='text-2xl'>Split {props.name}</h1>
+        <Link to={'/events/season/' + seasonId + '/races/race/' + raceId} className='flex justify-center p-4 bg-bg/45 rounded-xl '>
+            <h1 className='text-xl font-thin'>{props.name}</h1>
         </Link>
     )
 }

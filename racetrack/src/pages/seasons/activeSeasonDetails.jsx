@@ -42,12 +42,12 @@ const ActiveSeasonsDetails = () => {
                         <NavLink to={'/events/season/' + seasonId + '/rules'}
                            className={({isActive}) => isActive ? activeLink : normalLink}>Regulamin</NavLink>
                     </li>
-                    {adminCheck ? <li className={"mx-auto overflow-hidden transition-all ease-linear duration-300 " + `${menuExpand ? 'max-h-40' : 'max-h-0'}`}>
+                    <li className={"mx-auto overflow-hidden transition-all ease-linear duration-300 " + `${menuExpand ? 'max-h-40' : 'max-h-0'}`}>
                         <NavLink to={'/events/season/' + seasonId + '/reports'}
                                  className={({isActive}) => isActive ? activeLink : normalLink}>Incydenty</NavLink>
-                    </li> : null}
+                    </li>
                 </ul>
-                {adminCheck ? <button onClick={() => handleMenuExpand()} className={'ease-out duration-500 py-1 ' + `${menuExpand ? 'rotate-180' : ''}`}>▼</button> : null}
+                <button onClick={() => handleMenuExpand()} className={'ease-out duration-500 py-1 ' + `${menuExpand ? 'rotate-180' : ''}`}>▼</button>
             </div>
             <div className='bg-gradient-to-b from-bg/40 to-bg/55 min-h-full flex grow'><Outlet /></div>
         </>

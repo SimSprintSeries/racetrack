@@ -13,56 +13,61 @@ const ClassificationDetails = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        axios.get(API_SERVER + '/classification',
-            {
-                params: {
-                    currentPage: 0,
-                    pageSize: 50,
-                    sort: 'points',
-                    leagueId: seasonId
-                },
-            })
-            .then(result => result.data)
-            .then(response => setSeasonResults(response.content.map((item, index) => <ClassificationPosition pos={index} key={item.driver.id} {...item}></ClassificationPosition> )))
-            .then(() => setIsLoading(false))
 
-        axios.get(API_SERVER + '/classification/team',
-            {
-                params: {
-                    currentPage: 0,
-                    pageSize: 50,
-                    sort: 'points',
-                    leagueId: seasonId
-                },
-            })
-            .then(result => result.data)
-            .then(response => setTeamSeasonResults(response.content.map((item, index) => <TeamClassificationPosition pos={index} key={item.team.id} {...item}></TeamClassificationPosition> )))
+        const apiFn = async () => {
+            await axios.get(API_SERVER + '/classification',
+                {
+                    params: {
+                        currentPage: 0,
+                        pageSize: 50,
+                        sort: 'points',
+                        leagueId: seasonId
+                    },
+                })
+                .then(result => result.data)
+                .then(response => setSeasonResults(response.content.map((item, index) => <ClassificationPosition pos={index} key={item.driver.id} {...item}></ClassificationPosition> )))
+
+            await axios.get(API_SERVER + '/classification/team',
+                {
+                    params: {
+                        currentPage: 0,
+                        pageSize: 50,
+                        sort: 'points',
+                        leagueId: seasonId
+                    },
+                })
+                .then(result => result.data)
+                .then(response => setTeamSeasonResults(response.content.map((item, index) => <TeamClassificationPosition pos={index} key={item.team.id} {...item}></TeamClassificationPosition> )))
+        }
+
+        apiFn()
+            .then(() => setIsLoading(false))
 
     }, [seasonId !== 0])
 
 
     return (
         <>
-            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full p-3 grow'>
-                {seasonResults ? <div className='m-2 lg:flex lg:w-full'>
+            { !isLoading ? <div className={`text-color grid grid-cols-1 place-items-center w-full grow `}>
+                {seasonResults ? <div className='lg:flex lg:w-full'>
                     <div className='flex flex-col grow'>
-                        <h1 className='text-center text-lg py-2 bg-gradient-to-r from-color/10 to-color/0 rounded'>Klasyfikacja generalna</h1>
-                    <div className='grid grid-cols-[.6fr_2.2fr_1.8fr_1fr] justify-center w-full p-2 border-b-[1px] border-gray-400'>
+                        <h1 className='text-center w-full text-lg font-light py-2 bg-gradient-to-r from-color/10 to-color/0'>Klasyfikacja generalna</h1>
+                    <div className='px-3 grid grid-cols-[.6fr_2.2fr_1.8fr_1fr] justify-center w-full p-2 border-b-[1px] border-gray-400'>
                         <h1 className='text-center font-thin border-color'>Lp.</h1>
                         <h1 className='text-center font-thin border-color'>Kierowca</h1>
                         <h1 className='text-center font-thin border-color'>Team</h1>
                         <h1 className='text-center font-thin border-color'>Pkt.</h1>
                     </div>
-                    <ul className='list-none w-full'>{seasonResults}</ul>
+                    <ul className='list-none w-full px-3 animate-slideLeft'>{seasonResults}</ul>
                     </div>
                     <div className='flex flex-col grow'>
-                    <h1 className='text-center text-lg mt-8 py-2 bg-gradient-to-r from-color/10 to-color/0 rounded lg:mt-0'>Klasyfikacja drużynowa</h1>
-                    <div className='grid grid-cols-[.6fr_4fr_1fr] justify-center w-full p-2 border-b-[1px] border-gray-400'>
+                    <h1 className='text-center text-lg mt-8 py-2 font-light bg-gradient-to-r from-color/10 to-color/0 lg:mt-0'>Klasyfikacja drużynowa</h1>
+                    <div className='grid grid-cols-[.6fr_4fr_1fr] justify-center w-full p-2 border-b-[1px] border-gray-400 px-3'>
                         <h1 className='text-center font-thin border-color'>Lp.</h1>
                         <h1 className='text-center font-thin border-color'>Team</h1>
                         <h1 className='text-center font-thin border-color'>Pkt.</h1>
                     </div>
-                    <ul className='list-none w-full'>{teamSeasonResults}</ul>
+                    <ul className='list-none w-full px-3 animate-slideLeft'>{teamSeasonResults}</ul>
                     </div>
                 </div> : 'Brak danych :('}
             </div> : <LoadingSpinner/>}
