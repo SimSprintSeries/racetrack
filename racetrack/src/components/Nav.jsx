@@ -35,7 +35,8 @@ const Nav = () => {
                         displayName: response.data.displayName,
                         avatar: response.data.avatar,
                         driverId: response.data.driverId,
-                        isAdmin: response.data.isAdmin
+                        isAdmin: response.data.isAdmin,
+                        isSteward: response.data.isSteward
                     }))
                 })
                 .catch(ex => console.log(ex)) }

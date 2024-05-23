@@ -161,7 +161,7 @@ const DriverReports = (props: {driverId: number, api: string}) => {
                 setDriverReports(response.data.content.map((item: APIObject) => <Link className='truncate my-1'
                                                                                       key={item.id}
                                                                                       to={'/report/view/' + item.id}>[{item.reportedDriver.nickname}]
-                    - Nazwa Toru</Link>))
+                    - {item.race.displayText}</Link>))
                 setLastPage(response.data.last)
             })
     }, [props.driverId !== 0, page])

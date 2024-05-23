@@ -12,7 +12,8 @@ export interface IUserData {
     displayName: string,
     avatar: string,
     driverId: number,
-    isAdmin: boolean
+    isAdmin: boolean,
+    isSteward: boolean
 }
 
 export interface APIObject {
@@ -25,7 +26,8 @@ const userDataInitialState: IUserData = {
     displayName: '',
     avatar: '',
     driverId: 0,
-    isAdmin: false
+    isAdmin: false,
+    isSteward: false
 }
 
 const initialState: IAppState = {

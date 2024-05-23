@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import axios from "axios";
@@ -26,6 +26,8 @@ export const SendReport = () => {
     const [lap, setLap] = useState<string>('')
     const [reportDesc, setReportDesc] = useState<string>('')
     const [reportLinks, setReportLinks] = useState<string>('')
+
+    let history = useNavigate();
 
     useEffect(() => {
 
@@ -82,15 +84,17 @@ export const SendReport = () => {
         e.preventDefault()
         if(selectedEvent != '' && selectedDriver != '' && lap != '' && reportDesc != '' && reportLinks != '') {
 
-            axios.post(API_SERVER + '/report', {
+            setIsLoading(true)
+
+            axios.post(API_SERVER + '/report/race/' + selectedRace, {
                 incidentLink: reportLinks,
                 incidentDescription: reportDesc,
                 reportingDriver: {id: String(userData.driverId)},
                 reportedDriver: {id: selectedDriver},
-                race: {id: selectedEvent},
                 checked: false
             })
-                .then(response => console.log(response))
+                .then(() => setIsLoading(false))
+                .then(() => history(-1))
                 .catch(err => console.log(err))
         }
         else {
@@ -130,7 +134,7 @@ export const SendReport = () => {
                     <h1>Opis incydentu</h1>
                     <TextareaAutosize onChange={(e) => handleFieldChange(e, setReportDesc)} value={reportDesc} required className={inputStyleClass + ' grow'} />
 
-                    <button type='submit' onClick={sendReportToDatabase}>Prześlij</button>
+                    <button type='submit' onClick={sendReportToDatabase} className='p-4 bg-nav rounded-lg font-thin text-center mt-2 mx-2 border-[1px] border-gray-700'>Prześlij</button>
                     
                 </form>
             </div> : <LoadingSpinner/>}

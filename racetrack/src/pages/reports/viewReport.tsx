@@ -14,6 +14,7 @@ const ReportView = () => {
     const {reportId} = useParams()
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [editingMode, setEditingMode] = useState(false)
+    const stewardCheck = useSelector((state: RootState) => state.storeData.userData.isSteward)
 
     useEffect(() => {
 
@@ -31,17 +32,28 @@ const ReportView = () => {
         setEditingMode(!editingMode);
     }
 
+    const showDecision = () => {
+        if(editingMode) {
+            return <ReportDecisionEdit switchFn={() => switchEditingMode()} penaltySec={reportData.penaltySeconds}
+                                       penaltyId={reportData.id} penaltyPt={reportData.penaltyPoints}
+                                       isLoading={setIsLoading}
+                                       decisionDesc={reportData.decisionDescription}/>
+        } else if (reportData.checked && !editingMode) {
+            return <ReportDecision switchFn={() => switchEditingMode()} penaltySec={reportData.penaltySeconds}
+                                   penaltyPt={reportData.penaltyPoints}
+                                   decisionDesc={reportData.decisionDescription}/>
+        } else if (!reportData.checked && !editingMode) {
+            return null
+        }
+    }
+
     return (
         <div className='flex flex-col text-color p-4 flex-wrap'>
             {!isLoading ? <div className='flex flex-col gap-4 border-l-[1px] border-color/35'>
                 <ReportDesc {...reportData} />
-                {reportData.decisionDescription ? !editingMode ?
-                    <ReportDecision switchFn={() => switchEditingMode()} penaltySec={reportData.penaltySeconds}
-                                    penaltyPt={reportData.penaltyPoints}
-                                    decisionDesc={reportData.decisionDescription}/> :
-                    <ReportDecisionEdit switchFn={() => switchEditingMode()} penaltySec={reportData.penaltySeconds}
-                                        penaltyId={reportData.id} penaltyPt={reportData.penaltyPoints}
-                                        decisionDesc={reportData.decisionDescription}/> : null}
+                {stewardCheck && !reportData.checked && !editingMode ? <button onClick={() => switchEditingMode()} className='p-4 bg-bg/55 rounded-r-lg font-thin text-justify underline'>Dodaj decyzję</button> : null}
+                {showDecision()}
+
             </div> : <LoadingSpinner/>}
         </div>
     )
@@ -89,48 +101,70 @@ const ReportDecision = (props: {penaltySec: number, penaltyPt: number, decisionD
     )
 }
 
-const ReportDecisionEdit = (props: {penaltySec: number | string, penaltyPt: number, decisionDesc: string, penaltyId: number, switchFn: any}) => {
+const ReportDecisionEdit = (props: {penaltySec: number, penaltyPt: number, decisionDesc: string, penaltyId: number, switchFn: any, isLoading: any}) => {
 
-    const adminCheck = useSelector((state: RootState) => state.storeData.userData.isAdmin)
     const API_SERVER = useSelector((state: RootState) => state.storeData.apiServer)
-    const [editSeconds, setEditSeconds] = useState(props.penaltySec)
-    const [editPoints, setEditPoints] = useState(props.penaltyPt)
-    const [editDesc, setEditDesc] = useState(props.decisionDesc)
+
+    const [editSeconds, setEditSeconds] = useState(props.penaltySec ? props.penaltySec : 0)
+    const [editPoints, setEditPoints] = useState(props.penaltyPt ? props.penaltyPt : 0)
+    const [editDesc, setEditDesc] = useState(props.decisionDesc ? props.decisionDesc : '')
+
 
     function handleInputChangeSeconds(e: React.ChangeEvent<HTMLInputElement>): void {
-        setEditSeconds(() => e.target.valueAsNumber ? e.target.valueAsNumber : 0)
+        setEditSeconds(() => e.target.valueAsNumber)
     }
 
     function handleInputChangePoints(e: React.ChangeEvent<HTMLInputElement>): void {
-        setEditPoints(() => (!e.target.valueAsNumber || e.target.valueAsNumber > 20) ? 0 : e.target.valueAsNumber)
+        setEditPoints(() => e.target.valueAsNumber)
     }
 
     function handleInputChangeDesc(e: React.ChangeEvent<HTMLTextAreaElement>): void {
-        setEditDesc(() => e.target.value ? e.target.value : '')
+        setEditDesc(() => e.target.value)
     }
 
-    function postEditDecision() {
+    function postEditDecision(e: React.MouseEvent) {
+        e.preventDefault()
+
+
+        if(editDesc != '' && editSeconds != null && editPoints != null) {
+
+            props.isLoading(true)
+
+            axios.patch(API_SERVER + '/report/' + props.penaltyId, {
+                checked: true,
+                penaltySeconds: editSeconds,
+                penaltyPoints: editPoints,
+                decisionDescription: editDesc
+            })
+                .then(() => props.isLoading(false))
+                .catch(ex => {
+                    console.log(ex)
+                    window.location.href = "/error"
+                })
+
+        }
 
     }
 
 
     return (
         <div className='p-4 bg-bg/55 rounded-r-lg'>
-            <form action="">
+            <form >
                 <div className='mb-3'><span className='text-xl font-thin'>Edycja Decyzji</span></div>
                 <div className='flex flex-col m-2'>
                     <span className='text-sm text-color/55'>Kara sekundowa</span>
-                    <span><input onChange={handleInputChangeSeconds} type='number' className='bg-transparent font-light border-b-[1px] outline-0' value={editSeconds}/></span>
+                    <span><input onChange={handleInputChangeSeconds} type='number' required className='bg-transparent font-light border-b-[1px] outline-0' value={editSeconds}/></span>
                 </div>
                 <div className='flex flex-col m-2'>
                     <span className='text-sm text-color/55'>Kara punktowa</span>
-                    <span><input onChange={handleInputChangePoints} type='number' className='bg-transparent font-light border-b-[1px] outline-0' value={editPoints}/></span>
+                    <span><input onChange={handleInputChangePoints} type='number' required className='bg-transparent font-light border-b-[1px] outline-0' value={editPoints}/></span>
                 </div>
                 <div className='flex flex-col m-2'><span className='text-sm text-color/55'>Uzasadnienie</span><span className='font-light opacity-90'><TextareaAutosize
+                    required
                     onChange={handleInputChangeDesc}
                     className='w-full bg-transparent font-light border-b-[1px] outline-0'
                     value={editDesc}/></span></div>
-                <div className='flex justify-end p-2 gap-x-16'><button onClick={props.switchFn} className='underline'>Anuluj</button><button className='underline'>Zapisz</button></div>
+                <div className='flex justify-end p-2 gap-x-16'><button onClick={props.switchFn} className='underline'>Anuluj</button><button onClick={postEditDecision} type='submit' className='underline'>Zapisz</button></div>
             </form>
         </div>
     )

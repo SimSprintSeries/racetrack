@@ -6,30 +6,61 @@ import LoadingSpinner from "../../components/loadingSpinner";
 import axios from "axios";
 import {APIObject} from "../../store/appSlice";
 import {Link} from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const LeagueReports = () => {
 
     const {seasonId} = useParams();
     const API_SERVER = useSelector((state: RootState) => state.storeData.apiServer)
     const [isLoading, setIsLoading] = useState(true)
-    const [reportList, setReportList] = useState<[]>([])
+    const [reportList, setReportList] = useState([])
     const isUserLogged = useSelector((state: RootState) => state.storeData.isDiscordLogged)
+    const stewardCheck = useSelector((state: RootState) => state.storeData.userData.isSteward)
+    const [isMore, setIsMore] = useState(false)
+    const [page, setPage] = useState(0)
 
     useEffect(() => {
         axios.get(API_SERVER + '/report', {
             params: {
-                currentPage: 0,
+                currentPage: page,
                 pageSize: 15,
                 sort: 'id',
                 sortDirection: 'DESC',
+                checked: !stewardCheck,
                 leagueId: seasonId
             }
         })
-            .then(response => setReportList(response.data.content.map((item: APIObject) => <ReportListItem key={item.id} {...item}/>)))
+            //.then(response => setReportList(response.data.content.map((item: APIObject) => <ReportListItem key={item.id} {...item}/>)))\
+            .then(response => response.data)
+            .then(result => {
+                setIsMore(!result.last)
+                setReportList(result.content)
+            })
             .then(() => setIsLoading(false))
             .catch(err => console.log(err))
 
-    }, [seasonId])
+    }, [seasonId, stewardCheck])
+
+    function loadMoreReports() {
+        setPage(page+1)
+
+        axios.get(API_SERVER + '/report', {
+            params: {
+                currentPage: page,
+                pageSize: 15,
+                sort: 'id',
+                sortDirection: 'DESC',
+                checked: !stewardCheck,
+                leagueId: seasonId
+            }
+        })
+            .then(response => response.data)
+            .then(result => {
+                setIsMore(!result.last)
+                setReportList(reportList.concat(result.content))
+            })
+            .catch(err => console.log(err))
+    }
 
     return (
         <>
@@ -40,7 +71,11 @@ const LeagueReports = () => {
                                                                                 className='underline'>Zgłoś
                     incydent</Link></div> : null
                 }
-                <ul className='p-4 w-full flex flex-col gap-4 justify-center items-center'>{reportList.length ? reportList : 'Brak zgłoszonych incydentów'}</ul>
+
+                <InfiniteScroll className='p-4 w-full flex flex-col gap-4 justify-center items-center list-none'  next={loadMoreReports} hasMore={isMore} loader={<h1 className='text-center'><LoadingSpinner/></h1>} dataLength={reportList.length}>
+                    {reportList.map((item: APIObject) => <ReportListItem key={item.id} {...item}/>)}
+                </InfiniteScroll>
+                {/*<ul className='p-4 w-full flex flex-col gap-4 justify-center items-center'>{reportList.length ? reportList : 'Brak ocenionych incydentów'}</ul>*/}
             </div> : <LoadingSpinner/> }
         </>
     )
