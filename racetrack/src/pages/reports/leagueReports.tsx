@@ -26,7 +26,7 @@ const LeagueReports = () => {
                 pageSize: 15,
                 sort: 'id',
                 sortDirection: 'DESC',
-                checked: !stewardCheck,
+                checked: stewardCheck ? null : true,
                 leagueId: seasonId
             }
         })
@@ -41,16 +41,18 @@ const LeagueReports = () => {
 
     }, [seasonId, stewardCheck])
 
+
+    //funkcja dla infiniteScroll'a na załadowanie większej ilości zgłoszeń
     function loadMoreReports() {
         setPage(page+1)
 
         axios.get(API_SERVER + '/report', {
             params: {
-                currentPage: page,
+                currentPage: page + 1,
                 pageSize: 15,
                 sort: 'id',
                 sortDirection: 'DESC',
-                checked: !stewardCheck,
+                checked: stewardCheck ? null : true,
                 leagueId: seasonId
             }
         })
@@ -65,14 +67,14 @@ const LeagueReports = () => {
     return (
         <>
             { !isLoading ?
-            <div className='grow text-color w-full'>
+            <div className='grow text-color w-full '>
                 { isUserLogged ?
                     <div className='p-8 mb-4 border-b-[1px] border-color/35'><Link to={'/report/send/' + seasonId}
                                                                                 className='underline'>Zgłoś
                     incydent</Link></div> : null
                 }
 
-                <InfiniteScroll className='p-4 w-full flex flex-col gap-4 justify-center items-center list-none'  next={loadMoreReports} hasMore={isMore} loader={<h1 className='text-center'><LoadingSpinner/></h1>} dataLength={reportList.length}>
+                <InfiniteScroll className='p-4 px-7 w-full flex flex-col gap-4 justify-center items-center list-none'  next={loadMoreReports} hasMore={isMore} loader={<h1 className='text-center'><LoadingSpinner/></h1>} dataLength={reportList.length}>
                     {reportList.map((item: APIObject) => <ReportListItem key={item.id} {...item}/>)}
                 </InfiniteScroll>
                 {/*<ul className='p-4 w-full flex flex-col gap-4 justify-center items-center'>{reportList.length ? reportList : 'Brak ocenionych incydentów'}</ul>*/}
@@ -81,10 +83,11 @@ const LeagueReports = () => {
     )
 }
 
+// Kafelek wyświetlający zgłoszenie
 const ReportListItem = (props: APIObject) => {
 
     return (
-        <li className={`w-full rounded-lg p-4 ${props.checked ? 'bg-green/15' : 'bg-bg/55 '}`}>
+        <li className={`w-full rounded-lg p-4 backdrop-blur-sm bg-gradient-to-l ${props.checked ? 'from-green/40 to-pink-950/10' : '  from-green/10 via-blue-400/10 to-pink-950/10 '}`}>
             <Link to={'/report/view/' + props.id} className='flex flex-col gap-1'>
                 <span className='truncate'>{`Zgłoszenie nr ${props.id} - ${props.race.displayText}`}</span>
                 <span className='truncate text-sm text-color/75 ml-4'>{`Zgłaszający: ${props.reportingDriver.nickname} Zgłoszony: ${props.reportedDriver.nickname}`}</span>

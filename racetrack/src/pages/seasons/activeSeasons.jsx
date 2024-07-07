@@ -29,13 +29,15 @@ const ActiveSeasons = () => {
             </div>
     )
 }
+
+// kafelek aktywnego sezonu
 const ActiveSeasonTile = props => {
     const seasonId = props.id
 
     return (
-        <Link to={'/events/season/'+ seasonId + '/races'} className={'flex relative grow max-h-[33vh] bg-bg/50 items-center justify-center hover:cursor-pointer lg:border-[1px] border-color lg:max-h-fit rounded-lg animate-slideUp'}>
+        <Link to={'/events/season/'+ seasonId + '/races'} className={'flex relative grow max-h-[33vh] bg-bg/20 items-center justify-center hover:cursor-pointer lg:border-[1px] border-color lg:max-h-fit rounded-lg animate-slideUp'}>
             <h1 className='z-20'>{props.name}</h1>
-            <div className={`absolute right-0 top-0 w-full h-full aspect-auto z-10 rounded-lg bg-cover bg-center opacity-30`} style={{'background-image': `url('${props.img}')`}}></div>
+            <div className={`absolute right-0 top-0 w-full h-full aspect-auto z-10 rounded-lg bg-cover bg-center opacity-20`} style={{'background-image': `url('${props.img}')`}}></div>
         </Link>
     )
 }

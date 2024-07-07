@@ -1,6 +1,6 @@
 const Socials = () => {
     return (
-        <div className='flex flex-col mt-4 max-h-[10vh]'>
+        <div className='flex flex-col lg:flex-row grow justify-end mt-4 lg:px-[15vw] lg:pb-[2vh]'>
             <SocialMedia/>
             <Sponsors/>
             <Patronite/>
@@ -10,7 +10,7 @@ const Socials = () => {
 
 const SocialMedia = () => {
     return (
-        <div className='flex flex-col items-center px-8'>
+        <div className='flex flex-col items-center px-8 lg:justify-end lg:w-1/3'>
             <p className='text-color lg:text-[24px] font-thin'>Nasze sociale:</p>
             <div className='flex space-x-10 justify-center items-center mt-4 lg:mt-4'>
                 <a href="https://www.facebook.com/SimSprintSeries" target='_blank'><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="2em" height="2em" viewBox="0 0 30 30">
@@ -35,7 +35,7 @@ const SocialMedia = () => {
 
 const Sponsors = () => {
     return (
-        <div className='flex flex-col items-center lg:mt-2'>
+        <div className='flex flex-col items-center lg:mt-2 lg:justify-end lg:w-1/3'>
             <p className='text-color lg:text-[24px] mt-4 font-thin'>Współpracujemy z:</p>
             <div className='flex space-x-10 justify-center items-center mt-4'>
                 <a className='max-w-[20%] lg:max-w-[10%]' href=""><img src="https://1000logos.net/wp-content/uploads/2021/05/LetyShops-logo.png" alt="Letyshops"/></a>
@@ -48,8 +48,8 @@ const Sponsors = () => {
 
 const Patronite = () => {
     return (
-        <div className='flex justify-center mt-4 items-center h-full'>
-            <a className='max-w-[80%] lg:mt-1 lg:max-w-[15%]' href=""><img src="https://d3mi06r82nxl9g.cloudfront.net/files/logotypes/png/patronite-PNG-02-white.png" alt="Patronite"/></a>
+        <div className='flex flex-col justify-center mt-4 items-center lg:justify-end lg:w-1/3'>
+            <a className='max-w-[50%] lg:mt-1 lg:max-w-[40%]' href="https://patronite.pl/simss" target='_blank'><img src="https://d3mi06r82nxl9g.cloudfront.net/files/logotypes/png/patronite-PNG-02-white.png" alt="Patronite"/></a>
         </div>
     )
 }

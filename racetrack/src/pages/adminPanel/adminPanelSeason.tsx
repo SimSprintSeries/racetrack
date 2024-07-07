@@ -15,7 +15,7 @@ export const AdminPanelSeason = () => {
     return (
         <div className='grow text-color p-4 flex-wrap'>
             { adminCheck ? <div className='grid grid-cols-2 gap-4 w-full'>
-                <AdminModuleTile pathTarget='addNewSeason' name='Dodaj sezon' icon=''/>
+                <AdminModuleTile pathTarget='seasonPanel/addNewSeason' name='Dodaj sezon' icon=''/>
                 <AdminModuleTile pathTarget='seasonPanel/manageSeasons' name='Zarządzaj sezonami' icon=''/>
             </div> : <div className='grow flex justify-center items-center text-2xl font-thin'>Brak uprawnień</div>}
         </div>

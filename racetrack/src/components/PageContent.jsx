@@ -21,6 +21,7 @@ import LeagueReports from "../pages/reports/leagueReports";
 import {AdminPanelSeason, AdminPanelSeasonManage} from "../pages/adminPanel/adminPanelSeason";
 import AdminPanelSeasonManagePage from "../pages/adminPanel/adminPanelSeasonManage";
 import {SendReport} from "../pages/reports/sendReport";
+import AdminPanelAddSeason from "../pages/adminPanel/adminPanelAddSeason";
 
 const PageContent = () => {
     return (
@@ -64,6 +65,7 @@ const PageContent = () => {
                 <Route path='trackPanel' element={<AdminTrackModule/>}></Route>
                 <Route path='seasonPanel'>
                     <Route path='' element={<AdminPanelSeason/>}></Route>
+                    <Route path='addNewSeason' element={<AdminPanelAddSeason/>}></Route>
                     <Route path='manageSeasons' element={<AdminPanelSeasonManage/>}></Route>
                     <Route path='editSeason/:seasonId' element={<AdminPanelSeasonManagePage/>}></Route>
                 </Route>

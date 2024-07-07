@@ -3,9 +3,10 @@ import React from "react";
 export const ChangePageButtonLeft = ({disabledVar, onClickFn}) => {
     return (
         <button className='m-auto disabled:opacity-15' onClick={onClickFn} disabled={disabledVar}>
-            <svg className='fill-color' xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-                <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z"/>
-                <path d="M13.293 7.293 8.586 12l4.707 4.707 1.414-1.414L11.414 12l3.293-3.293-1.414-1.414z"/>
+            <svg className='fill-color' width="24" height="24" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 320 512">
+                <path
+                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
             </svg>
         </button>
     )
@@ -14,9 +15,10 @@ export const ChangePageButtonLeft = ({disabledVar, onClickFn}) => {
 export const ChangePageButtonRight = ({disabledVar, onClickFn}) => {
     return (
         <button className='m-auto disabled:opacity-15' onClick={onClickFn} disabled={disabledVar}>
-            <svg className='rotate-180 fill-color' xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-                <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z"/>
-                <path d="M13.293 7.293 8.586 12l4.707 4.707 1.414-1.414L11.414 12l3.293-3.293-1.414-1.414z"/>
+            <svg className='fill-color' width="24" height="24" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 320 512">
+                <path
+                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
             </svg>
         </button>
     )

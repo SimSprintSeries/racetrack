@@ -27,7 +27,7 @@ const Event = () => {
                 completed: false
             },
             headers: {
-                'Access-Control-Allow-Origin' : true
+                "Access-Control-Allow-Origin": "*"
             }
         })
             .then(response => response.data)
@@ -39,7 +39,7 @@ const Event = () => {
 
     return (
         <div className='grow'>
-            <div className="text-2xl p-4 pb-12 text-color text-center">Najbliższe wydarzenie</div>
+            <div className="text-2xl pt-4 pb-12 text-color text-center">Najbliższe wydarzenie</div>
             <div className="flex w-full items-center justify-center">
                 <div className=''>
                     <div
@@ -69,7 +69,7 @@ const LastEvent = () => {
         <div className='flex flex-col lg:grow m-auto'>
             <div className="text-2xl p-16 pb-12 text-color text-center">Ostatnia transmisja</div>
             <div className="flex w-full items-center justify-center">
-                <iframe className='aspect-video w-5/6 mb-16 shadow-black/50 ' src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug" title='LiveStream' allowFullScreen></iframe>
+                <iframe className='aspect-video w-full lg:w-2/3 mb-4 shadow-black/50 ' src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug" title='LiveStream' allowFullScreen></iframe>
             </div>
         </div>
     )

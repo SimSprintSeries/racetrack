@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import LoadingSpinner from "../../components/loadingSpinner.jsx";
@@ -50,7 +50,7 @@ const RaceResultPosition = props => {
         <div className='grid grid-cols-[.6fr_.1fr_3fr_1fr_1fr_1fr_1fr] justify-center w-full p-2' style={{backgroundColor: bgColorFL}}>
             <h1 className='text-l text-center'>{props.finishPosition}.</h1>
             <div style={{backgroundColor: '#'+props.team.colour}}></div>
-            <h1 className='truncate ml-2'>{props.driver.nickname}</h1>
+            <h1 className='truncate ml-2'><Link className='hover:cursor-pointer' to={'/driver/' + props.driver.id}>{props.driver.nickname}</Link></h1>
             <h1 className='text-center'>{props.polePosition ? 'PP' : ''}</h1>
             <h1 className='text-center'>{props.fastestLap ? 'FL' : ''}</h1>
             <h1 className='text-center'>{props.dsq ? 'DSQ' : (props.dnf ? 'DNF' : '')}</h1>

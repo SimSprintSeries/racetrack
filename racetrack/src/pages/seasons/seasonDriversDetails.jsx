@@ -30,7 +30,7 @@ const SeasonDriversDetails = () => {
 
     return (
         <>
-            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full p-3 grow'>
+            { !isLoading ? <div className='text-color grid grid-cols-1 place-items-center w-full p-3 px-7 grow'>
                 {seasonResults ? <div className='grid grid-cols-[2.9fr_2.8fr] justify-center w-full p-2 border-b-[1px] border-gray-400'>
                     <h1 className='text-center font-thin'>Kierowca</h1>
                     <h1 className='text-center font-thin '>Team</h1>
@@ -46,11 +46,11 @@ const DriverTile = props => {
 
     return (
         <li>
-            <Link to={'/driver/' + props.id} className='grid grid-cols-[.1fr_2.8fr_2.8fr] justify-center w-full p-2'>
+            <div className='grid grid-cols-[.1fr_2.8fr_2.8fr] justify-center w-full p-2'>
                 <div style={props.team ? {backgroundColor: '#'+props.team.colour} : null}></div>
-                <h1 className='truncate ml-2'>{props.nickname}</h1>
+                <h1 className='truncate ml-2'><Link className='hover:cursor-pointer' to={'/driver/' + props.id}>{props.nickname}</Link></h1>
                 <h1 className='truncate ml-2'>{props.team ? props.team.name : null}</h1>
-            </Link>
+            </div>
         </li>
     )
 }

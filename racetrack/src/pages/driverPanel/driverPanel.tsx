@@ -30,7 +30,7 @@ const DriverPanel = () => {
 
     return (
         <>
-            { !isLoading ? <div className='flex flex-col text-color grow m-4 border-l-[1px] border-color/35 gap-y-4 animate-slideUp'>
+            { !isLoading ? <div className='flex flex-col text-color grow m-4 gap-y-4 animate-slideUp'>
                 <DriverMainInfo {...userData}/>
                 <DriverRaceStats {...driverStats}/>
                 <DriverElo {...driverStats}/>
@@ -43,7 +43,7 @@ const DriverPanel = () => {
 
 const DriverMainInfo = (props: IUserData) => {
     return (
-        <div className='text-2xl px-6 py-3 bg-bg/55 flex gap-x-3 items-center rounded-r-lg backdrop-blur-sm'>
+        <div className='text-2xl px-6 py-3 bg-bg/55 flex gap-x-3 items-center rounded-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <img className="w-16 h-16 rounded-full ring-2 ring-color"
                  src={`https://cdn.discordapp.com/avatars/${props.id}/${props.avatar}.png?size=160`} alt="Bordered avatar" />
             <div>{props.displayName}</div>
@@ -56,12 +56,12 @@ const DriverRaceStats = (props: APIObject) => {
     const tileStyle = 'bg-bg/65 p-3 flex flex-col rounded'
 
     return (
-        <div className='bg-bg/55 rounded-r-lg'>
+        <div className='bg-bg/55 rounded-lg bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <div className='px-4 pt-4 '>
                 <span className='text-sm text-color/75'>Statystyki</span>
             </div>
-                <div className='grid grid-cols-3 grid-rows-2 px-4 py-4 gap-1 backdrop-blur-sm'>
-                <div className={tileStyle}><span className='text-[12px] text-color/85'>Wyścigi: </span><span className='text-lg text-right font-bold mt-1'>{props.totalRacesDriven ? props.totalRacesDriven : 0}</span></div>
+                <div className='grid grid-cols-3 grid-rows-2 px-4 py-4 gap-1 backdrop-blur-sm '>
+                <div className={tileStyle}><span className='text-[12px] text-color/85 '>Wyścigi: </span><span className='text-lg text-right font-bold mt-1'>{props.totalRacesDriven ? props.totalRacesDriven : 0}</span></div>
                 <div className={tileStyle}><span className='text-[12px] text-color/85'>Zwycięstwa: </span><span className='text-lg text-right font-bold mt-1'>{props.totalWins ? props.totalWins : 0}</span></div>
                 <div className={tileStyle}><span className='text-[12px] text-color/85'>Podium: </span><span className='text-lg text-right font-bold mt-1'>{props.podiums ? props.podiums : 0}</span></div>
                 <div className={tileStyle}><span className='text-[12px] text-color/85'>Top 10: </span><span className='text-lg text-right font-bold mt-1'>{props.totalTopTenResults ? props.totalTopTenResults : 0}</span></div>
@@ -79,7 +79,7 @@ const DriverElo = (props: APIObject) => {
     useEffect(() => {
         const eloArray = props.elos.sort((a: APIObject, b: APIObject) => b.value - a.value).map((item: APIObject) => {
             return (
-                <div key={item.id} className='flex flex-col p-4 bg-bg/65 gap-y-1 rounded-lg min-w-[7em]'>
+                <div key={item.id} className='flex flex-col p-4 bg-bg/65 gap-y-1 rounded-lg min-w-[7em] '>
                     <span className='text-lg font-bold truncate'>{item.game.name}:</span>
                     <span className='font-thin text-right'>{item.value}</span>
                 </div>
@@ -89,7 +89,7 @@ const DriverElo = (props: APIObject) => {
     }, [props !== undefined])
 
     return (
-        <div className='px-4 pt-4 bg-bg/55 rounded-r-lg backdrop-blur-sm'>
+        <div className='px-4 pt-4 bg-bg/55 rounded-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <span className='text-sm text-color/75'>Elo</span>
             <div className=' py-4 flex overflow-auto gap-x-2'>
                 {gameElo.length ? gameElo : <span className='font-thin text-center w-full'>Brak elo do wyświetlenia</span>}
@@ -127,7 +127,7 @@ const DriverSeasons = (props: {driverId: number, api: string}) => {
     }
 
     return (
-        <div className='px-4 pt-4 bg-bg/55 rounded-r-lg backdrop-blur-sm'>
+        <div className='px-4 pt-4 bg-bg/55 rounded-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <span className='text-sm text-color/75'>Moje sezony</span>
             <div className='px-0 py-4 flex min-h-[12em]'>
                 <ChangePageButtonLeft onClickFn={() => changePage(-1)} disabledVar={!page} />
@@ -171,7 +171,7 @@ const DriverReports = (props: {driverId: number, api: string}) => {
     }
 
     return (
-        <div className='px-4 pt-4 bg-bg/55 rounded-r-lg backdrop-blur-sm'>
+        <div className='px-4 pt-4 bg-bg/55 rounded-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <span className='text-sm text-color/75'>Moje zgłoszenia</span>
             <div className='px-0 py-4 flex min-h-[12em]'>
                 <ChangePageButtonLeft onClickFn={() => changePage(-1)} disabledVar={!page} />

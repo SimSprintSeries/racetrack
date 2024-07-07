@@ -3,7 +3,7 @@ import {Socials} from "../components/Socials.jsx";
 
 const Home = () => {
     return (
-        <div className='grow flex flex-col'>
+        <div className='flex flex-col grow'>
             <Events/>
             <Socials/>
         </div>

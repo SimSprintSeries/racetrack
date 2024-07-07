@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 #mainContainer {
     background-image: url('./images/bg.png');
     background-repeat: no-repeat;

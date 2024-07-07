@@ -22,7 +22,7 @@ const SeasonRules = () => {
 
 
     return (
-        <div className='w-full p-6 text-color' >
+        <div className='w-full p-6 px-12 text-color' >
             <div dangerouslySetInnerHTML={{__html: seasonRules}}></div>
         </div>
     )

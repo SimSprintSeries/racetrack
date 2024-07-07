@@ -11,13 +11,14 @@ const EventDetails = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const API_SERVER = useSelector(state => state.storeData.apiServer)
     const isUserLogged = useSelector(state => state.storeData.isDiscordLogged)
+    const driverId = useSelector((state => state.storeData.driverId))
 
     useEffect(() => {
         axios.get(API_SERVER + '/event/' + eventId)
             .then(response => response.data)
             .then(result => setRaceDetails({
                 'displayText': result.displayText,
-                'startDate': result.startDate,
+                'startDate': result.races[0].startDate,
                 'presenceActive': result.activeForPresence,
                 'banner': result.league.banner
             }))
@@ -33,14 +34,6 @@ const EventDetails = () => {
             .then(() => setIsLoaded(true))
     }, [eventId])
 
-    const displayPresenceButton = () => {
-        if(raceDetails.presenceActive && isUserLogged) {
-            return <ButtonPresence/>
-        } else {
-            return null
-        }
-    }
-
     return (
         <>{ isLoaded ? <div className='w-full'>
             <div className='relative p-4'>
@@ -52,10 +45,10 @@ const EventDetails = () => {
                 })}</h1>
                 <div className='absolute top-0 left-0 w-full h-full -z-10 bg-cover opacity-35' style={{'background-image': `url('${raceDetails.banner}')`}}></div>
             </div>
-            {displayPresenceButton()}
+            <ButtonPresence driver={driverId} userLogged={isUserLogged} presenceActive={raceDetails.presenceActive}/>
 
             <div className='text-color flex flex-col lg:flex-row w-full p-8 space-y-4 grow'>
-                {raceList}
+                {raceList ? raceList : null}
             </div>
         </div> : ''}
         </>
@@ -74,17 +67,14 @@ const RaceTile = props => {
     )
 }
 
-const ButtonPresence = () => {
-    const [presence, setPresence] = useState(false)
-
-    const handleClick = () => {
-            setPresence(!presence)
-    }
+const ButtonPresence = (props) => {
 
     return (
-        <div className='flex justify-center p-2'>
-            <label onClick={() => handleClick()} htmlFor='presence' className={'p-2 px-4 border-color border-[1px] rounded-xl ease-linear duration-100 w-1/2 text-center ' + `${presence ? 'bg-color text-bg' : 'bg-none text-color'}`} >{presence ? 'Odznacz obecność' : 'Zaznacz obecność'}</label>
-            <input id='presence' name='presence' className='hidden' type="checkbox"/>
+        <div className='flex p-2 text-color'>
+            {props.userLogged && props.presenceActive ? <div className='flex gap-4 mx-auto'>
+                <button className='border-color border-[1px] rounded py-2 px-4 w-1/2'>Obecny</button>
+                <button className='border-color border-[1px] rounded py-2 px-4 w-1/2'>Nieobecny</button>
+            </div> : null}
         </div>
     )
 }

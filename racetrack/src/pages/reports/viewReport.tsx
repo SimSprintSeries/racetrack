@@ -49,7 +49,7 @@ const ReportView = () => {
 
     return (
         <div className='flex flex-col text-color p-4 flex-wrap'>
-            {!isLoading ? <div className='flex flex-col gap-4 border-l-[1px] border-color/35'>
+            {!isLoading ? <div className='flex flex-col gap-4'>
                 <ReportDesc {...reportData} />
                 {stewardCheck && !reportData.checked && !editingMode ? <button onClick={() => switchEditingMode()} className='p-4 bg-bg/55 rounded-r-lg font-thin text-justify underline'>Dodaj decyzję</button> : null}
                 {showDecision()}
@@ -65,10 +65,10 @@ const ReportDesc = (props: APIObject) => {
 
     return (
         <>
-            <div className='p-4 bg-bg/55 rounded-r-lg font-thin text-justify'>
+            <div className='p-4 bg-bg/55 rounded-r-lg font-thin text-justify backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
                 <span>{`Zgłoszenie nr ${props.id} - ${props.race.displayText} - ${props.race.split.name}`}</span>
             </div>
-            <div className='p-4 bg-bg/55 rounded-r-lg'>
+            <div className='p-4 bg-bg/55 rounded-r-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <div className='mb-2'><span className='text-xl font-thin'>Szczegóły zgłoszenia</span></div>
             <div className='flex flex-col m-2'><span className='text-sm text-color/55'>Zgłaszający</span><span>{props.reportingDriver.nickname}</span></div>
             <div className='flex flex-col m-2'><span className='text-sm text-color/55'>Zgłoszony</span><span>{props.reportedDriver.nickname}</span></div>
@@ -91,7 +91,7 @@ const ReportDecision = (props: {penaltySec: number, penaltyPt: number, decisionD
     const adminCheck = useSelector((state: RootState) => state.storeData.userData.isAdmin)
 
     return (
-        <div className='p-4 bg-bg/55 rounded-r-lg'>
+        <div className='p-4 bg-bg/55 rounded-r-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <div className='mb-3'><span className='text-xl font-thin'>Decyzja</span></div>
             <div className='flex flex-col m-2'><span className='text-sm text-color/55'>Kara sekundowa</span><span>{props.penaltySec}</span></div>
             <div className='flex flex-col m-2'><span className='text-sm text-color/55'>Kara punktowa</span><span>{props.penaltyPt}</span></div>
@@ -136,7 +136,9 @@ const ReportDecisionEdit = (props: {penaltySec: number, penaltyPt: number, decis
                 penaltyPoints: editPoints,
                 decisionDescription: editDesc
             })
-                .then(() => props.isLoading(false))
+                .then(() => {
+                    window.location.reload();
+                })
                 .catch(ex => {
                     console.log(ex)
                     window.location.href = "/error"
@@ -148,7 +150,7 @@ const ReportDecisionEdit = (props: {penaltySec: number, penaltyPt: number, decis
 
 
     return (
-        <div className='p-4 bg-bg/55 rounded-r-lg'>
+        <div className='p-4 bg-bg/55 rounded-r-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <form >
                 <div className='mb-3'><span className='text-xl font-thin'>Edycja Decyzji</span></div>
                 <div className='flex flex-col m-2'>

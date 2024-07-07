@@ -29,7 +29,7 @@ const OtherDriverPanel = () => {
 
     return (
         <>
-            { !isLoading ? <div className='flex flex-col text-color m-4 border-l-[1px] border-color/35 gap-y-4'>
+            { !isLoading ? <div className='flex flex-col text-color m-4 gap-y-4'>
                 <OtherDriverMainInfo name={driverStats.nickname} avatar={driverStats.discordUser.avatar} id={driverStats.discordUser.id}/>
                 <OtherDriverRaceStats {...driverStats}/>
                 <OtherDriverElo {...driverStats}/>
@@ -41,7 +41,7 @@ const OtherDriverPanel = () => {
 
 const OtherDriverMainInfo = (props: APIObject) => {
     return (
-        <div className='text-2xl px-6 py-3 bg-bg/55 flex gap-x-3 items-center rounded-r-lg backdrop-blur-sm'>
+        <div className='text-2xl px-6 py-3 bg-bg/55 flex gap-x-3 items-center rounded-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <img className={"w-16 h-16 rounded-full ring-2 ring-color " + `${props.avatar ? '' : 'opacity-75'}`}
                  src={props.avatar ? `https://cdn.discordapp.com/avatars/${props.id}/${props.avatar}.png?size=160` : `https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/discord-white-icon.png`} alt="" />
             <div>{props.name}</div>
@@ -54,7 +54,7 @@ const OtherDriverRaceStats = (props: APIObject) => {
     const tileStyle = 'bg-bg/65 p-3 flex flex-col rounded'
 
     return (
-        <div className='bg-bg/55 rounded-r-lg backdrop-blur-sm'>
+        <div className='bg-bg/55 rounded-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <div className='px-4 pt-4'>
                 <span className='text-sm text-color/75'>Statystyki</span>
             </div>
@@ -77,7 +77,7 @@ const OtherDriverElo = (props: APIObject) => {
     useEffect(() => {
         const eloArray = props.elos.sort((a: APIObject, b: APIObject) => b.value - a.value).map((item: APIObject) => {
             return (
-                <div key={item.id} className='flex flex-col p-4 bg-bg/65 gap-y-1 rounded-lg min-w-[7em]'>
+                <div key={item.id} className='flex flex-col p-4 bg-bg/65 gap-y-1 rounded-lg min-w-[7em] '>
                     <span className='text-lg font-bold truncate'>{item.game.name}:</span>
                     <span className='font-thin text-right'>{item.value}</span>
                 </div>
@@ -87,7 +87,7 @@ const OtherDriverElo = (props: APIObject) => {
     }, [props !== undefined])
 
     return (
-        <div className='px-4 pt-4 bg-bg/55 rounded-r-lg backdrop-blur-sm'>
+        <div className='px-4 pt-4 bg-bg/55 rounded-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <span className='text-sm text-color/75'>Elo</span>
             <div className=' py-4 flex overflow-auto gap-x-2'>
                 {gameElo.length ? gameElo : <span className='font-thin text-center w-full'>Brak elo do wyświetlenia</span>}
@@ -125,7 +125,7 @@ const OtherDriverSeasons = (props: {driverId: number | string, api: string}) => 
     }
 
     return (
-        <div className='px-4 pt-4 bg-bg/55 rounded-r-lg backdrop-blur-sm'>
+        <div className='px-4 pt-4 bg-bg/55 rounded-lg backdrop-blur-sm bg-gradient-to-r from-pink-950/10 via-blue-400/5 to-green/10'>
             <span className='text-sm text-color/75'>Sezony</span>
             <div className='px-0 py-4 flex min-h-[12em]'>
                 <ChangePageButtonLeft onClickFn={() => changePage(-1)} disabledVar={!page} />
