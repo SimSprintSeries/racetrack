@@ -81,7 +81,7 @@ export const AdminPanelSeasonManage = () => {
 const SeasonListItem = (props: APIObject) => {
     return (
         <div className='p-4 flex'>
-            <span className='w-2/3 truncate'>{props.name}</span>
+            <span className='w-2/3 truncate pl-4'>{props.name}</span>
             <span className='grow flex justify-center underline'><Link to={'/admin/seasonPanel/editSeason/' + props.id}>Zarządzaj</Link></span>
         </div>
     )

@@ -43,7 +43,8 @@ const EventDetails = () => {
                     month: 'long',
                     year: 'numeric'
                 })}</h1>
-                <div className='absolute top-0 left-0 w-full h-full -z-10 bg-cover opacity-35' style={{'background-image': `url('${raceDetails.banner}')`}}></div>
+                <div className='absolute top-0 left-0 w-full h-full z-0 bg-cover opacity-35 ' style={{'backgroundImage': `url('${raceDetails.banner}')`}}></div>
+
             </div>
             <ButtonPresence driver={driverId} userLogged={isUserLogged} presenceActive={raceDetails.presenceActive}/>
 

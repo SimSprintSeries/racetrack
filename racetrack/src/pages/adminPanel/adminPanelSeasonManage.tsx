@@ -27,7 +27,7 @@ const AdminPanelSeasonManagePage = () => {
     },[seasonId])
 
     return (
-        <div className='grow text-color p-4 flex-wrap'>
+        <div className='grow text-color p-4 px-7 flex-wrap'>
             <div className='grid grid-cols-2 gap-4 w-full pb-4 border-b-[1px] border-color/50 '>
                 <AdminModuleTile pathTarget={`seasonPanel/editSeason/${seasonId}/editSeasonDetails`} name='Edytuj sezon' icon=''/>
                 <AdminModuleTile pathTarget={`seasonPanel/editSeason/${seasonId}/editSeasonDrivers`} name='Edytuj kierowców' icon=''/>

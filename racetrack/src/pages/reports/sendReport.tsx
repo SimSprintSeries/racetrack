@@ -8,6 +8,7 @@ import LoadingSpinner from "../../components/loadingSpinner";
 import TextareaAutosize from "react-textarea-autosize";
 import AsyncSelect from "react-select/async";
 import {IOptions} from "../../components/interfaces";
+import {selectStyles} from "../../components/stylesClasses";
 
 //main component
 export const SendReport = () => {
@@ -27,15 +28,7 @@ export const SendReport = () => {
 
     let history = useNavigate();
 
-    //stylowanie Async Selecta
-    const selectStyles = {
-        container: (state: any) => 'w-full p-2',
-        control: (state: any) => 'bg-gradient-to-r from-pink-950/15 via-blue-400/5 to-green/10 p-4 ' + `${state.menuIsOpen ? 'rounded-t-lg' : 'rounded-lg' }`,
-        dropdownIndicator: (state: any) => `w-12 px-4 flex items-center justify-center ${state.selectProps.menuIsOpen ? 'rotate-180' : ''}`,
-        placeholder: () => 'opacity-50',
-        menu: (state: any) => 'bg-bg bg-gradient-to-br from-pink-950/15 via-blue-400/5 to-green/10 p-4 rounded-b-lg -translate-y-2 max-w-[22.75rem]',
-        option: (state: any) => 'my-4 truncate'
-    }
+
     //stylowanie inputów innych niż async select
     const inputStyleClass = 'appearance-none rounded-lg bg-transparent bg-gradient-to-r from-pink-950/15 via-blue-400/5 to-green/10 p-4 m-2 resize-none'
 
@@ -162,8 +155,9 @@ export const SendReport = () => {
 
                     <button type='submit' onClick={sendReportToDatabase} className='p-4 bg-nav rounded-lg font-thin mt-2 mx-2 tracking-wider bg-gradient-to-l from-pink-950/15 via-blue-400/5 to-green/10 flex justify-center items-center gap-x-2'>
                         Prześlij
-                        <svg className='fill-color max-h-[1rem]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <path d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304C0 417.3 81.5 467.9 100.2 478.1c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-7.5-4.3-14.4-9.8-19.5C108.8 431.9 96 414.4 96 384c0-53 43-96 96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"/>
+                        <svg className='fill-color max-h-[1rem]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path
+                                d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/>
                         </svg>
                     </button>
                     
