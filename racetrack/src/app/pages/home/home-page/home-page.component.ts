@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from "@angular/core";
 import { raceService } from "../../../services/races.service";
 import { LoadingSpinnerComponent } from "../../../ui-elements/loading-spinner/loading-spinner.component";
 import { DateFormatPipe } from "../../../pipes/date-pl";
+import { navOption } from "../../../ui-elements/navbar/nav.types";
 
 @Component({
   selector: "sss-home-page",
@@ -14,6 +15,8 @@ export class HomePageComponent implements OnInit {
   private raceService = inject(raceService);
   public isLoading: boolean = true;
   public nextEvent: any;
+
+  public socials: navOption[] = [{ label: "facebook", icon: "" }];
 
   public ngOnInit(): void {
     this.getNextEventData();
@@ -37,7 +40,7 @@ export class HomePageComponent implements OnInit {
               next: (response: any) => {
                 this.nextEvent = {
                   ...this.nextEvent,
-                  raceLogo: "data:image/jpg;base64" + response.content.logo,
+                  raceLogo: "data:image/jpg;base64," + response.banner,
                 };
               },
               error: (err) => {

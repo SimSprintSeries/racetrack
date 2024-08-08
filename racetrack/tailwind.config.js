@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         dark100: "#1a1a1a",
+        semidark: "#bfbfbf",
         bright100: "#faf4ed",
       },
       fontFamily: {

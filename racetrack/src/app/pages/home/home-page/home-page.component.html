@@ -1,4 +1,4 @@
-<div class="w-full h-full text-bright100 flex mt-12">
+<div class="w-full h-full text-bright100 flex flex-col mt-12">
   <div class="mx-auto flex">
     <div class="w-1/2 flex justify-start">
       <div class="p-4 max-w-[405px] text-center">
@@ -6,16 +6,24 @@
 
         @if(!isLoading) {
         <div
-          class="flex flex-col p-4 m-12 aspect-square rounded-lg bg-dark100 overflow-hidden"
+          [class]="
+            'flex flex-col p-4 m-12 aspect-square rounded-lg bg-dark100 overflow-hidden relative'
+          "
         >
-          <span class="text-2xl font-medium opacity-75">{{
+          <span class="text-2xl font-medium text-semidark z-20">{{
             nextEvent.displayText
           }}</span>
-          <span class="m-auto">{{ nextEvent.split.league.name }}</span>
-          <span class="text-2xl text-end opacity-75">{{
+          <span class="m-auto text-semidark z-20 drop-shadow-lg">{{
+            nextEvent.split.league.name
+          }}</span>
+          <span class="text-2xl text-end text-semidark z-20">{{
             nextEvent.startDate | DateFormat
           }}</span>
-          <img [src]="nextEvent.raceLogo" alt="" />
+          <img
+            class="absolute h-full top-0 left-0 object-cover object-right opacity-20"
+            [src]="nextEvent.raceLogo"
+            alt=""
+          />
         </div>
         } @else {
         <sss-loading-spinner />
@@ -36,5 +44,17 @@
       </div>
     </div>
   </div>
-  <div></div>
+  <div class="flex mx-auto">
+    <div>
+      <div>Nasze sociale:</div>
+      <div></div>
+    </div>
+    <div>
+      <div>Współpracujemy z:</div>
+      <div></div>
+    </div>
+    <div>
+      <div></div>
+    </div>
+  </div>
 </div>
