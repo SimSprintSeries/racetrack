@@ -1,0 +1,26 @@
+<div
+  (mouseenter)="handleDropdownVisibility(true)"
+  (mouseleave)="handleDropdownVisibility(false)"
+>
+  <div
+    class="flex justify-center items-center gap-x-2 select-none cursor-pointer hover:-translate-y-0.5 duration-100 ease-in"
+  >
+    <div [innerHTML]="option.icon && (option.icon | sanitizeHtml)" class=""></div>
+    <div class="text-bright100 font-poppins font-light">
+      {{ option.label }}
+    </div>
+  </div>
+  @if(dropdownVisible) {
+  <div
+    class="absolute -bottom-[150%] left-0 flex flex-col gap-y-3 p-3 pt-12 animate-slideDown"
+  >
+    @for(subOption of option.children; track subOption) {
+    <div
+      class="text-bright100 font-poppins font-extralight text-sm select-none cursor-pointer hover:translate-x-0.5 duration-100 ease-in"
+    >
+      {{ subOption.label }}
+    </div>
+    }
+  </div>
+  }
+</div>

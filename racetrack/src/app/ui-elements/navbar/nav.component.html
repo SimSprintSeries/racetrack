@@ -1,0 +1,8 @@
+<nav class="flex p-8 gap-x-24">
+  <div><img class="h-12 mix-blend-screen" src="ssslogo.png" alt="SSS" /></div>
+  <div class="flex gap-x-8">
+    @for(option of navOptions; track option) {
+    <sss-nav-bar-option [option]="option" />
+    }
+  </div>
+</nav>
