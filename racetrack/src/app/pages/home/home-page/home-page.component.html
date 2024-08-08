@@ -1,1 +1,40 @@
-<div class="w-full h-full text-bright100">Hello</div>
+<div class="w-full h-full text-bright100 flex mt-12">
+  <div class="mx-auto flex">
+    <div class="w-1/2 flex justify-start">
+      <div class="p-4 max-w-[405px] text-center">
+        <span>Najbliższe wydarzenie</span>
+
+        @if(!isLoading) {
+        <div
+          class="flex flex-col p-4 m-12 aspect-square rounded-lg bg-dark100 overflow-hidden"
+        >
+          <span class="text-2xl font-medium opacity-75">{{
+            nextEvent.displayText
+          }}</span>
+          <span class="m-auto">{{ nextEvent.split.league.name }}</span>
+          <span class="text-2xl text-end opacity-75">{{
+            nextEvent.startDate | DateFormat
+          }}</span>
+          <img [src]="nextEvent.raceLogo" alt="" />
+        </div>
+        } @else {
+        <sss-loading-spinner />
+        }
+      </div>
+    </div>
+    <div class="w-1/2 flex justify-start">
+      <div class="flex flex-col text-center">
+        <span>Ostatnia transmisja</span>
+        <div>
+          <iframe
+            class="aspect-video p-4 m-12 h-[309px]"
+            src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug"
+            title="LiveStream"
+            allowFullScreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div></div>
+</div>
