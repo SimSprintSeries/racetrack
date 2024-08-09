@@ -12,6 +12,11 @@ import { RouterOutlet } from "@angular/router";
     >
       <sss-nav />
       <router-outlet />
+      <footer
+        class="text-center text-[10px] font-extralight place-self-end w-full text-bright100 p-2 backdrop-blur-md"
+      >
+        Copyright Example © SimSprintSeries
+      </footer>
     </main>
   `,
   styles: [],

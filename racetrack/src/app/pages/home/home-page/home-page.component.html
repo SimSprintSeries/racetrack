@@ -1,6 +1,6 @@
-<div class="w-full h-full text-bright100 flex flex-col mt-12">
-  <div class="mx-auto flex">
-    <div class="w-1/2 flex justify-start">
+<div class="w-full grow text-bright100 flex flex-col mt-20">
+  <div class="w-full flex gap-x-24">
+    <div class="w-1/2 flex justify-center">
       <div class="p-4 max-w-[405px] text-center">
         <span>Najbliższe wydarzenie</span>
 
@@ -30,12 +30,12 @@
         }
       </div>
     </div>
-    <div class="w-1/2 flex justify-start">
-      <div class="flex flex-col text-center">
+    <div class="w-1/2 flex justify-center">
+      <div class="flex flex-col w-full text-center">
         <span>Ostatnia transmisja</span>
         <div>
           <iframe
-            class="aspect-video p-4 m-12 h-[309px]"
+            class="aspect-video p-4 m-12 mx-auto h-[309px]"
             src="https://www.youtube.com/embed?listType=playlist&list=UUHA2AJ3bbWxc2ccIB1EF5ug"
             title="LiveStream"
             allowFullScreen
@@ -44,17 +44,38 @@
       </div>
     </div>
   </div>
-  <div class="flex mx-auto">
-    <div>
-      <div>Nasze sociale:</div>
-      <div></div>
+  <div class="w-full p-4 mt-auto">
+    <div class="flex justify-center p-8 max-h-[155px]">
+      <div class="flex flex-col items-center w-1/2">
+        <span>Partnerzy</span>
+        <div class="flex gap-x-12 justify-center items-center">
+          @for(partner of partners; track partner) {
+          <a class="w-1/6" href=""
+            ><img [src]="partner.image" [alt]="partner.label"
+          /></a>
+          }
+        </div>
+      </div>
+      <div class="flex flex-col items-center w-1/2">
+        <span>Możesz nas wesprzeć na</span>
+        <a href="https://patronite.pl/simss"
+          ><img
+            src="https://d3mi06r82nxl9g.cloudfront.net/files/logotypes/png/patronite-PNG-02-white.png"
+            alt="Patronite"
+            class="max-w-[30%] mx-auto"
+        /></a>
+      </div>
     </div>
-    <div>
-      <div>Współpracujemy z:</div>
-      <div></div>
-    </div>
-    <div>
-      <div></div>
+    <div class="flex justify-center gap-x-8">
+      @for(social of socials; track social) {
+      <div>
+        <a
+          [href]="social.url"
+          target="_blank"
+          [innerHTML]="social.icon | sanitizeHtml"
+        ></a>
+      </div>
+      }
     </div>
   </div>
 </div>
